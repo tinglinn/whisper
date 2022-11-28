@@ -6,71 +6,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import SummaryOverview from './summary/summary-overview';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-
-function Menu({ navigation }) {
-    return (
-        <View style={styles.menu}>
-            <Text style={styles.menuText}>Overview</Text>
-            <Text style={styles.menuText}>Accomplishments</Text>
-            <Text style={styles.menuText}>Time</Text>
-        </View>
-    );
-}
-
-function renderStat({ item }) {
-    return (
-        <View style={styles.statItem}>
-            <MaterialCommunityIcons name="bookmark-check-outline" color={Themes.colors.darkgray} size={20} />
-            <View style={{ marginLeft: 6 }}><Text style={styles.stat}>{item}</Text></View>
-        </View>
-    );
-}
-
-function Box({ title, times, stats }) {
-    return (
-        <View style={styles.box}>
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.boxBody}>
-                <View style={{ flex: 1, alignContent: 'center', width: '40%' }}>
-                    <FlatList data={times} keyExtractor={(item, index) => index} renderItem={({ item }) => (<Text style={styles.time}>{item}</Text>)} ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
-                </View>
-                <View style={{ flex: 1, alignContent: 'center', width: '60%' }}>
-                    <FlatList data={stats} keyExtractor={(item, index) => index} renderItem={renderStat} ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
-                </View>
-            </View>
-        </View>
-    )
-}
-
-function renderInsight({ item }) {
-    return (
-        <View style={styles.statItem}>
-            <Feather name="thumbs-up" color={Themes.colors.darkgray} size={16} />
-            <View style={{ marginLeft: 8 }}><Text style={styles.stat}>{item}</Text></View>
-        </View>
-    );
-}
-
-function Insights({ insights }) {
-    return (
-        <View style={styles.insightBox}>
-            <FlatList data={insights} keyExtractor={(item, index) => index} renderItem={renderInsight}
-                ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
-        </View>
-    )
-}
+const Stack = createStackNavigator();
 
 function SummaryScreen() {
     return (
-        <SafeAreaView style={styles.screen}>
-            <Header text={"nov 11 - 15"} />
-            <Menu />
-            <Box title={"most productive day"} times={["monday"]} stats={["3 work sessions", "1 task: CS106A"]} />
-            <Box title={"most focused periods"} times={["1-3pm", "7-10pm"]} stats={["Able to achieve 80% of goals scheduled during these times"]} />
-            <Insights insights={["You started the week off on a great note!",
-                "ADHD Insight: periods after meals and exercise are often most productive!"]} />
-        </SafeAreaView>
+        <NavigationContainer independent={true}>
+            <Stack.Navigator initialRouteName='Overview' screenOptions={{ headerShown: false }} >
+                <Stack.Screen name="Overview" component={SummaryOverview}/>
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
 
@@ -134,8 +81,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 25,
         paddingRight: 25,
-        marginTop: windowWidth * 0.32,
-        marginBottom: 15,
+       marginBottom: 15,
         justifyContent: 'space-between',
         alignItems: 'center',
     },
