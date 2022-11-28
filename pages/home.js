@@ -51,7 +51,7 @@ function Tasks() {
 function HomeScreen() {
     return (
         <SafeAreaView style={styles.screen}>
-            <Greeting greetingText={"good morning, Cole! how are you doing today?"} />
+            <Greeting greetingText={"good morning, Cole! welcome back!"} />
             <Tasks/>
         </SafeAreaView>
     );

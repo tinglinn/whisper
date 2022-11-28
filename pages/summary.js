@@ -1,21 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions, Button } from 'react-native';
 import Themes from '../assets/Themes/index';
-import Header from '../components/header';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import SummaryOverview from './summary/summary-overview';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import SummaryOverview from './summary/overview';
+import Accomplishments from './summary/accomplishments';
 
 const Stack = createStackNavigator();
 
 function SummaryScreen() {
     return (
         <NavigationContainer independent={true}>
-            <Stack.Navigator initialRouteName='Overview' screenOptions={{ headerShown: false }} >
-                <Stack.Screen name="Overview" component={SummaryOverview}/>
+            <Stack.Navigator initialRouteName='Overview' screenOptions={{ headerShown: false, animationEnabled: false }} >
+                <Stack.Screen name="Overview" component={SummaryOverview} />
+                <Stack.Screen name="Accomplishments" component={Accomplishments} />
             </Stack.Navigator>
         </NavigationContainer>
     );
