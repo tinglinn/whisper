@@ -12,14 +12,16 @@ import HomeScreen from './pages/home';
 
 const Tab = createBottomTabNavigator();
 
-function TasksScreen() {
-  return (
-    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Header text={"tasks"} />
-      <Text>tasks!</Text>
-    </SafeAreaView>
-  );
-}
+// IMPORT SCREENS
+import TasksScreen from './pages/task';
+// function TasksScreen() {
+//   return (
+//     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <Header text={"tasks"} />
+//       <Text>tasks!</Text>
+//     </SafeAreaView>
+//   );
+// }
 
 function CalendarScreen() {
   return (
