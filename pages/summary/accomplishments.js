@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList, Dimensions, Pressable } from 'react-n
 import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -13,6 +13,37 @@ function Menu({ navigation }) {
             <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Overview</Text></Pressable>
             <Pressable onPress={() => navigation.navigate("Accomplishments")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Accomplishments</Text></Pressable>
             <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Time</Text></Pressable>
+        </View>
+    );
+}
+
+function renderAccomplishment({ item }) {
+    const name = item.name;
+    const stat = item.stat;
+    const trend = item.trend;
+    let icon = null;
+    if (trend == "up") {
+        icon = <Ionicons name="ios-arrow-up-circle-outline" color={Themes.colors.darkgray} size={24} />
+    } else {
+        icon = <Ionicons name="ios-arrow-up-circle-outline" color={Themes.colors.darkgray} size={24} />
+    }
+    return (
+        <View style={styles.accomplishItem}>
+            <View style={{width: '65%'}}><Text style={styles.nameText}>{name}</Text></View>
+            <View style={{ width: '20%', alignItems: 'flex-end' }}><Text style={styles.statText}>{stat}</Text></View>
+            {icon}
+        </View>
+    )
+}
+
+function AccomplishmentList({data, title}) {
+    return (
+        <View style={styles.box}>
+            <Text style={styles.title}>{title}</Text>
+            <View style={styles.boxBody}>
+                <FlatList data={data} keyExtractor={(item, index) => index} renderItem={renderAccomplishment}
+                    ItemSeparatorComponent={() => <View style={{ height: 25 }} />}></FlatList>
+            </View>
         </View>
     );
 }
@@ -34,14 +65,19 @@ function Insights({ insights }) {
         </View>
     )
 }
+const data = [
+    { name: "Tasks completed", stat: "6", trend: "up" },
+    { name: "Work sessions started", stat: "12", trend: "up" },
+    { name: "Work session goals completed", stat: "10", trend: "up" },
+    { name: "Average work session length", stat: "1.5h", trend: "up" }];
 
 function Accomplishments({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"nov 11 - 15"} />
             <Menu navigation={navigation} />
-            <Insights insights={["You started the week off on a great note!",
-                "ADHD Insight: periods after meals and exercise are often most productive!"]} />
+            <AccomplishmentList data={data} title={"accomplishments"} />
+            <Insights insights={["You accomplished 3 tasks more than one day before their due date!"]} />
         </SafeAreaView>
     );
 }
@@ -116,6 +152,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: Themes.colors.purple,
     },
+    accomplishItem: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    nameText: {
+        fontFamily: 'Poppins',
+        fontSize: 18,
+        color: Themes.colors.darkgray,
+    },
+    statText: {
+        fontFamily: 'Poppins',
+        fontSize: 30,
+        color: Themes.colors.purple,
+    }
 });
 
 export default Accomplishments;
