@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import Themes from '../assets/Themes/index';
 
 function Menu({ navigation }) {
     return (

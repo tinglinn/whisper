@@ -12,7 +12,7 @@ function Menu({ navigation }) {
         <View style={styles.menu}>
             <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Overview</Text></Pressable>
             <Pressable onPress={() => navigation.navigate("Accomplishments")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Accomplishments</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Time</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("Time")}><Text style={styles.menuText}>Time</Text></Pressable>
         </View>
     );
 }

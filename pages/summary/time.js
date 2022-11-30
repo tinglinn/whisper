@@ -3,43 +3,54 @@ import { StyleSheet, Text, View, FlatList, Dimensions, Pressable } from 'react-n
 import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
 
 function Menu({ navigation }) {
     return (
         <View style={styles.menu}>
-            <Pressable onPress={() => navigation.navigate("Overview")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Overview</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Overview</Text></Pressable>
             <Pressable onPress={() => navigation.navigate("Accomplishments")}><Text style={styles.menuText}>Accomplishments</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Time")}><Text style={styles.menuText}>Time</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("Time")}><Text style={{fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple}}>Time</Text></Pressable>
         </View>
     );
 }
 
-function renderStat({ item }) {
+function renderTime({ item }, maxTime) {
+    const name = item.name;
+    let timeLength = (parseFloat(item.stat) / parseFloat(maxTime)) * 80;
+    timeLength = timeLength.toString() + "%";
+    const stat = item.stat.toString();
+
     return (
-        <View style={styles.statItem}>
-            <MaterialCommunityIcons name="bookmark-check-outline" color={Themes.colors.darkgray} size={20} />
-            <View style={{ marginLeft: 6 }}><Text style={styles.stat}>{item}</Text></View>
+        <View style={styles.timeItem}>
+            <View style={{flexDirection: 'row'}}>
+                <Text style={styles.nameText}>{name}{': '}</Text>
+                <Text style={{fontFamily: 'Poppins-Bold', fontSize: 18, color: Themes.colors.darkgray}}>{stat}{' hours'}</Text>
+            </View>
+            <View
+                style={{
+                    backgroundColor: Themes.colors.red, width: timeLength,
+                    height: 30, borderRadius: 12.5, marginTop: 10
+                }}>
+            </View>
         </View>
-    );
+    )
 }
 
-function Box({ title, times, stats }) {
+function TimeBreakdown({ data, title }) {
+    const maxTime = Math.max(...data.map(data => data.stat));
+    
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
             <View style={styles.boxBody}>
-                <View style={{ flex: 1, alignContent: 'center', width: '40%' }}>
-                    <FlatList data={times} keyExtractor={(item, index) => index} renderItem={({ item }) => (<Text style={styles.time}>{item}</Text>)} ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
-                </View>
-                <View style={{ flex: 1, alignContent: 'center', width: '60%' }}>
-                    <FlatList data={stats} keyExtractor={(item, index) => index} renderItem={renderStat} ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
-                </View>
+                <FlatList data={data} keyExtractor={(item, index) => index} renderItem={(item) => renderTime(item, maxTime)}
+                    ItemSeparatorComponent={() => <View style={{ height: 32 }} />}></FlatList>
             </View>
         </View>
-    )
+    );
 }
 
 function renderInsight({ item }) {
@@ -60,15 +71,20 @@ function Insights({ insights }) {
     )
 }
 
-function SummaryOverview({navigation}) {
+const data = [
+    { name: "Time in Events", stat: 8, trend: "up" },
+    { name: "Time Estimated for Tasks", stat: 12, trend: "up" },
+    { name: "Time Needed for Tasks", stat: 16, trend: "up" }];
+
+
+function Time({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"nov 11 - 15"} />
-            <Menu navigation={navigation}/>
-            <Box title={"most productive day"} times={["monday"]} stats={["3 work sessions", "1 task: CS106A"]} />
-            <Box title={"most focused periods"} times={["1-3pm", "7-10pm"]} stats={["Able to achieve 80% of goals scheduled during these times"]} />
-            <Insights insights={["You started the week off on a great note!",
-                "ADHD Insight: periods after meals and exercise are often most productive!"]} />
+            <Menu navigation={navigation} />
+            <TimeBreakdown data={data} title={"time management"} />
+            <Insights insights={["You underestimated the time it would take to complete CS106A and Taxes",
+                "Still, your time estimations were 10% more accurate than last week!"]} />
         </SafeAreaView>
     );
 }
@@ -143,7 +159,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: Themes.colors.purple,
     },
+    timeItem: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'flex-start',
+    },
+    nameText: {
+        fontFamily: 'Poppins',
+        fontSize: 18,
+        color: Themes.colors.darkgray,
+    }
 });
 
-export default SummaryOverview;
-
+export default Time;

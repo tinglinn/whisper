@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SummaryOverview from './summary/overview';
 import Accomplishments from './summary/accomplishments';
+import Time from './summary/time';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ function SummaryScreen() {
             <Stack.Navigator initialRouteName='Overview' screenOptions={{ headerShown: false, animationEnabled: false }} >
                 <Stack.Screen name="Overview" component={SummaryOverview} />
                 <Stack.Screen name="Accomplishments" component={Accomplishments} />
+                <Stack.Screen name="Time" component={Time} />
             </Stack.Navigator>
         </NavigationContainer>
     );
