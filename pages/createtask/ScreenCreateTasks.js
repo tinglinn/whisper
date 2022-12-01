@@ -16,7 +16,7 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
     <View style={styles.screen}>
       <Header text={"Add Task"} />
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
+      <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
       </Pressable>
 
@@ -24,15 +24,17 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
 
       
         <Text style={styles.title}>What do you want to call your task? </Text>
-
-        <Text style={{marginTop: 20,}}> Task Name </Text>
-        <TextInput
+  
+        <Text style={{marginTop: 20, width: '100%'}}> Task Name </Text>
+        <View style={{ width: '100%'}}>
+          <TextInput
             style={styles.input}
             onChangeText={onChangeNumber}
             value={number}
             placeholder="Ex. CS106A"
             keyboardType="numeric"
-        />
+          />
+        </View>
       </View>
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks2')}>
@@ -101,12 +103,11 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 10,
     borderWidth: 1,
-    width:'100%',
     padding: 20,
     borderRadius: 7,
     color: 'dark-grey',
-    flexDirection: 'row',
-    
+    height: '10%',
+    width: '100%',
   },
 
 

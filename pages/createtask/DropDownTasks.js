@@ -3,22 +3,17 @@
   import { StyleSheet, View, Text } from 'react-native';
   import { Dropdown } from 'react-native-element-dropdown';
   import AntDesign from 'react-native-vector-icons/AntDesign';
-  
+
   const data = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
+    { label: 'CS106A', value: '1' },
+    { label: 'CS106A', value: '2' },
+    { label: 'CS106A', value: '3' },
   ];
 
   const DropdownComponent = () => {
     const [value, setValue] = useState(null);
 
-    const renderItem = (item: any) => {
+    const renderItem = (item) => {
       return (
         <View style={styles.item}>
           <Text style={styles.textItem}>{item.label}</Text>
@@ -64,12 +59,13 @@
 
   const styles = StyleSheet.create({
     dropdown: {
-      margin: 16,
       height: 50,
       backgroundColor: 'white',
       borderRadius: 12,
       padding: 12,
       shadowColor: '#000',
+      width: 300,
+      
       shadowOffset: {
         width: 0,
         height: 1,
@@ -90,13 +86,18 @@
     },
     textItem: {
       flex: 1,
-      fontSize: 16,
+      fontSize: 18,
+      fontFamily: 'Poppins',
+      
+      
     },
     placeholderStyle: {
-      fontSize: 16,
+      fontSize: 18,
+      fontFamily: 'Poppins',
     },
     selectedTextStyle: {
-      fontSize: 16,
+      fontSize: 18,
+      fontFamily: 'Poppins',
     },
     iconStyle: {
       width: 20,

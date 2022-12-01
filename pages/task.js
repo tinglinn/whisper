@@ -7,6 +7,8 @@ import Constants from 'expo-constants';
 
 // IMPORTED SCREENS **
 import ScreenTaskType from './createtask/ScreenTaskType';
+import ScreenTaskType2 from './createtask/ScreenTaskType2';
+import ScreenTaskType3 from './createtask/ScreenTaskType3';
 import ScreenReviewTaskInfo from './createtask/ScreenReviewTaskInfo';
 import ScreenCreateTasks from './createtask/ScreenCreateTasks';
 import ScreenCreateTasks2 from './createtask/ScreenCreateTasks2';
@@ -25,7 +27,10 @@ export default function App() {
     // SET UP THE NAVIGATION ** 
     <NavigationContainer independent={true} options={{                   headerShown: false,}}>
       <Stack.Navigator >
-
+        
+        <Stack.Screen name = "ScreenTaskType" options={{headerShown: false}} component = {ScreenTaskType}/>
+        <Stack.Screen name = "ScreenTaskType2" options={{headerShown: false}} component = {ScreenTaskType2}/>
+        <Stack.Screen name = "ScreenTaskType3" options={{headerShown: false}} component = {ScreenTaskType3}/>
 
         <Stack.Screen name = "ScreenCreateTasks" options={{headerShown: false}} component = {ScreenCreateTasks}/>
         <Stack.Screen name = "ScreenCreateTasks2" options={{headerShown: false}} component = {ScreenCreateTasks2}/>
@@ -33,7 +38,7 @@ export default function App() {
         <Stack.Screen name = "ScreenCreateTasks4" options={{headerShown: false}} component = {ScreenCreateTasks4}/>
         <Stack.Screen name = "ScreenCreateTasks5" options={{headerShown: false}} component = {ScreenCreateTasks5}/>
         <Stack.Screen name = "ScreenCreateTasksComplete" options={{headerShown: false}} component = {ScreenCreateTasksComplete}/>
-        <Stack.Screen name = "ScreenTaskType" options={{headerShown: false}} component = {ScreenTaskType}/>
+        
         <Stack.Screen name = "ScreenReviewTaskInfo" options={{headerShown: false}} component = {ScreenReviewTaskInfo}/>
         
         

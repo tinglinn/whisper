@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-import { RadioButton  } from 'react-native-paper';
-import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 
 

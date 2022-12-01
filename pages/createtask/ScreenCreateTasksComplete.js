@@ -1,12 +1,7 @@
-import React, { useState } from "react";
-import { Dimensions } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-import { RadioButton  } from 'react-native-paper';
-import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
-import Header from '../../components/header';
+import React from "react";
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Themes from '../../assets/Themes/index';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-import Slider from '@react-native-community/slider';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -24,7 +19,7 @@ export default function ScreenCreateTasksComplete({ navigation }) { // note navi
     <LinearGradient style={styles.background} colors={[Themes.colors.red, Themes.colors.mediumpurple, Themes.colors.red, Themes.colors.mediumpurple]}>
     <MaterialCommunityIcons name="checkbox-marked-circle" color={Themes.colors.white} size={50} style={{marginBottom:10}} />
                 <Text style={[styles.title, {marginBottom: 15}]}>Added new task! </Text>
-                <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
+                <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Your Tasks</Text></View>
       </Pressable>
