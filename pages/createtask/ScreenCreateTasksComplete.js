@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',

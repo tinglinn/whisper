@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-nati
 import React, { useState } from "react";
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
+import BackButton from './backButton';
 
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 export default function ScreenTaskType({ navigation }) { // note navigation pprop
@@ -16,16 +17,14 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
     <View style={styles.screen}>
       <Header text={"Add Task"} />
 
-      <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
       
         <Text style={styles.title}>What do you want to call your task? </Text>
   
-        <Text style={{marginTop: 20, width: '100%'}}> Task Name </Text>
+        <Text style={{ marginTop: 20, width: '100%', fontFamily: 'Poppins', fontSize: 18, color: Themes.colors.darkgray}}> Task Name </Text>
         <View style={{ width: '100%'}}>
           <TextInput
             style={styles.input}
@@ -71,7 +70,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -79,12 +79,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     margin: 20,
   },
-
+ 
   title: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
     color: Themes.colors.darkgray,
-    
   },
   // titleText: {
   //   backgroundColor: 'cornsilk',

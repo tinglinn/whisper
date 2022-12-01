@@ -5,8 +5,7 @@ import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
-
-
+import BackButton from './backButton';
 
 export default function ScreenCreateTasks5({ navigation }) { // note navigation pprop
 
@@ -20,10 +19,7 @@ export default function ScreenCreateTasks5({ navigation }) { // note navigation 
     <View style={styles.screen}>
       <Header text={"Add Task"} />
       
-
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
@@ -32,7 +28,7 @@ export default function ScreenCreateTasks5({ navigation }) { // note navigation 
 
         <View style={{flexDirection: 'row', alignItems: 'center', marginVertical:10}}>
         <MaterialCommunityIcons name="lightbulb-on-outline" color={Themes.colors.purple} size={20} />
-        <Text style={{color:Themes.colors.purple,}}>Your average work session is 2 hours.</Text>
+        <Text style={{fontFamily: 'Poppins', color:Themes.colors.purple,}}>Your average work session is 2 hours.</Text>
         </View>
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
         <Slider
@@ -45,7 +41,7 @@ export default function ScreenCreateTasks5({ navigation }) { // note navigation 
           minimumTrackTintColor={Themes.colors.purple}
           maximumTrackTintColor={Themes.colors.background}
         />
-        <Text>{valueHours} sessions</Text>
+        <Text style={{ fontFamily: 'Poppins' }}>{valueHours} sessions</Text>
 
       </View>
 
@@ -83,7 +79,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',

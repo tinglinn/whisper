@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-nati
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import BackButton from './backButton';
 
 export default function ScreenCreateTasks4({ navigation }) { // note navigation pprop
   const [value, setValue] = React.useState('first');
@@ -13,9 +14,7 @@ export default function ScreenCreateTasks4({ navigation }) { // note navigation 
       <Header text={"Add Task"} />
 
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
@@ -29,15 +28,15 @@ export default function ScreenCreateTasks4({ navigation }) { // note navigation 
         >
           <View style={[{flexDirection:'row', alignItems: 'center', marginTop: 20,}]}>
             <RadioButton value="first" />
-            <Text>Low</Text>
+            <Text style={styles.option}>Low</Text>
           </View>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
           <RadioButton value="second" />
-            <Text>Medium</Text>
+            <Text style={styles.option} >Medium</Text>
           </View>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
           <RadioButton value="third" />
-            <Text>High</Text>
+            <Text style={styles.option}>High</Text>
           </View>
         </RadioButton.Group>
       </View>
@@ -76,7 +75,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
     
   },
 
+  option: {
+    fontFamily: "Poppins",
+    fontSize: 16
+  }
 
 });
 //   return (

@@ -7,9 +7,7 @@ import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
-
-
-
+import BackButton from './backButton';
 
 export default function ScreenCreateTasks3({ navigation }) { // note navigation pprop
 
@@ -22,11 +20,8 @@ export default function ScreenCreateTasks3({ navigation }) { // note navigation 
   return (
     <View style={styles.screen}>
       <Header text={"Add Task"} />
-      
-
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+  
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
@@ -44,7 +39,7 @@ export default function ScreenCreateTasks3({ navigation }) { // note navigation 
           minimumTrackTintColor={Themes.colors.purple}
           maximumTrackTintColor={Themes.colors.background}
         />
-        <Text>{valueHours} hours</Text>
+        <Text style={{fontFamily: 'Poppins', fontSize: 16}}>{valueHours} hours</Text>
         <Slider
           style={{width: (Dimensions.get('window').width - 120), height: 40}}
           value={valueMins}
@@ -55,7 +50,7 @@ export default function ScreenCreateTasks3({ navigation }) { // note navigation 
           minimumTrackTintColor={Themes.colors.purple}
           maximumTrackTintColor={Themes.colors.background}
         />
-        <Text>{valueMins} minutes</Text>
+        <Text style={{fontFamily: 'Poppins', fontSize: 16}}>{valueMins} minutes</Text>
       </View>
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4')}>
@@ -92,7 +87,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -105,7 +101,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
     color: Themes.colors.darkgray,
-    
   },
   
   input: {

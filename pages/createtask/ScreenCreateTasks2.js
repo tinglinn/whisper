@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-nati
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import BackButton from './backButton';
 
 export default function ScreenCreateTasks2({ navigation }) { // note navigation pprop
   const [text, onChangeText] = React.useState("Useless Text");
@@ -18,10 +19,7 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
     <View style={styles.screen}>
       <Header text={"Add Task"} />
 
-
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
@@ -30,14 +28,14 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
 
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
         <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-          <View style={{flexDirection:'row', alignItems: 'center', marginTop: 20,}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginRight: 25}}>
             <RadioButton value="first" />
-            <Text>Yes, it is due...  </Text>
+            <Text style={styles.option}>Yes, it is due... </Text>
             <DatePicker date={date} onDateChange={setDate} />
           </View>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10, marginRight: 25}}>
             <RadioButton value="second" />
-            <Text>No, I don't need to finish it by a set time.</Text>
+            <Text style={styles.option}>No, I don't need to finish it by a set time.</Text>
           </View>
         </RadioButton.Group>
       </View>
@@ -55,8 +53,8 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1, 
-    alignItems: 'center', 
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
   },
 
@@ -71,13 +69,14 @@ const styles = StyleSheet.create({
   },
 
   buttontext: {
-  color: 'white',
-  fontFamily: 'Poppins-SemiBold',
+    color: 'white',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
   },
 
- card: {
-    alignItems: 'left', 
+  card: {
+    width: '85%',
+    alignItems: 'left',
     justifyContent: 'center',
     backgroundColor: 'white',
     padding: 30,
@@ -89,19 +88,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
     color: Themes.colors.darkgray,
-    
   },
   
   input: {
     marginTop: 10,
     borderWidth: 1,
-    width:'100%',
+    width: '100%',
     padding: 20,
     borderRadius: 7,
     color: 'dark-grey',
     flexDirection: 'row',
     
   },
+
+  option: {
+    flexShrink: 1,
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    color: Themes.colors.black,
+  }
 
 
 });
