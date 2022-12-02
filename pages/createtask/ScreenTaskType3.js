@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { Dimensions } from 'react-native';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
@@ -23,8 +21,11 @@ export default function ScreenTaskType3({ navigation }) { // note navigation ppr
     <View style={styles.screen}>
     
     
-      <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
+      <Pressable style={{position: 'absolute', left: 20, top: 70}} onPress={() => navigation.navigate('ScreenTaskType')}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <MaterialCommunityIcons name="arrow-left" color={Themes.colors.purple} size={20} />
+          <Text style={{ fontFamily: 'Poppins', color: Themes.colors.purple }}>Back</Text>
+        </View>
       </Pressable>
 
       <View style={styles.card}>

@@ -9,14 +9,14 @@ import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import DropdownComponent from './DropDownTasks';
 import { Dropdown } from "react-native-element-dropdown";
-
+import BackButton from "./backButton";
 
 
 export default function ScreenTaskType({ navigation }) { // note navigation pprop
 
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
     
       <View style={styles.card}>
 

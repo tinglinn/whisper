@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -27,7 +27,7 @@ function Greeting({greetingText}) {
     );
 }
 
-function Tasks() {
+function Tasks({navigation}) {
     return (
         <View style={styles.tasks}>
             <View style={styles.titleContainer}>
@@ -38,21 +38,23 @@ function Tasks() {
                 <Text style={styles.tasksText}>CS106A</Text>
                 <Text style={styles.tasksText}>Psych</Text>
                 <Text style={styles.tasksText}>Taxes</Text>
-                <Text
-                    style={{
-                        fontFamily: 'Poppins', fontSize: 24, color: Themes.colors.background, textAlign: 'left',
-                    }}>
-                    + Add task...
-                </Text>
+                <Pressable onPress={() => navigation.navigate('Tasks')}>
+                    <Text
+                        style={{
+                            fontFamily: 'Poppins', fontSize: 24, color: Themes.colors.background, textAlign: 'left',
+                        }}>
+                        + Add task...
+                    </Text>
+                </Pressable>
             </View>
         </View>
     )
 }
-function HomeScreen() {
+function HomeScreen({navigation}) {
     return (
         <SafeAreaView style={styles.screen}>
             <Greeting greetingText={"good morning, Cole! welcome back!"} />
-            <Tasks/>
+            <Tasks navigation={navigation} />
         </SafeAreaView>
     );
 }
