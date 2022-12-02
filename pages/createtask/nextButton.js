@@ -3,7 +3,6 @@ import { Text, View, Pressable, StyleSheet } from 'react-native';
 import Themes from '../../assets/Themes/index';
 
 function NextButton({ navigation, screenName, active }) {
-    console.log(active)
     let button = null;
     if (active) {
         button = < Pressable onPress = {() => navigation.navigate(screenName)}>

@@ -1,12 +1,8 @@
-
-
 import React from "react";
-import { Dimensions } from 'react-native';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
-import Slider from '@react-native-community/slider';
 import DropdownComponent from './DropDownTasks';
 import { Dropdown } from "react-native-element-dropdown";
 import BackButton from "./backButton";
@@ -29,7 +25,7 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
 
         
         <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{marginTop: 30, flexDirection: 'row', alignItems: 'center'}}><Text style={[styles.bodyText]}>or Create new task type </Text><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={25} /></View>
+          <View style={{marginTop: 30, flexDirection: 'row', alignItems: 'center'}}><Text style={[styles.bodyText]}>or Create new task type </Text><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={25} /></View>
         </Pressable>
 
       </View>

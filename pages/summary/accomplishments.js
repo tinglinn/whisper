@@ -4,6 +4,7 @@ import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import DisplayWeek from './displayWeek';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -74,7 +75,8 @@ const data = [
 function Accomplishments({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
-            <Header text={"nov 11 - 15"} />
+            <Header text={"summary"} />
+            <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
             <Menu navigation={navigation} />
             <AccomplishmentList data={data} title={"accomplishments"} />
             <Insights insights={["You accomplished 3 tasks more than one day before their due date!"]} />
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 25,
         paddingRight: 25,
-        marginTop: windowWidth * 0.32,
+        marginTop: 15,
         marginBottom: 15,
         justifyContent: 'space-between',
         alignItems: 'center',

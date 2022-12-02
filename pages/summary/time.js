@@ -4,6 +4,7 @@ import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import DisplayWeek from './displayWeek'
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -72,7 +73,6 @@ function Insights({ insights }) {
 }
 
 const data = [
-    { name: "Time in Events", stat: 8, trend: "up" },
     { name: "Time Estimated for Tasks", stat: 12, trend: "up" },
     { name: "Time Needed for Tasks", stat: 16, trend: "up" }];
 
@@ -80,7 +80,8 @@ const data = [
 function Time({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
-            <Header text={"nov 11 - 15"} />
+            <Header text={"summary"} />
+            <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
             <Menu navigation={navigation} />
             <TimeBreakdown data={data} title={"time management"} />
             <Insights insights={["You underestimated the time it would take to complete CS106A and Taxes",
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 25,
         paddingRight: 25,
-        marginTop: windowWidth * 0.32,
+        marginTop: 15,
         marginBottom: 15,
         justifyContent: 'space-between',
         alignItems: 'center',

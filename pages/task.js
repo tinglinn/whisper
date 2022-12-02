@@ -25,7 +25,7 @@ export default function App() {
   return (
 
     // SET UP THE NAVIGATION ** 
-    <NavigationContainer independent={true} options={{                   headerShown: false,}}>
+    <NavigationContainer independent={true} options={{headerShown: false,}}>
       <Stack.Navigator >
         
         <Stack.Screen name = "ScreenTaskType" options={{headerShown: false}} component = {ScreenTaskType}/>
