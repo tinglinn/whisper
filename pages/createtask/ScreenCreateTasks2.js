@@ -6,15 +6,14 @@ import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import BackButton from './backButton';
+import NextButton from "./nextButton";
 
 export default function ScreenCreateTasks2({ navigation }) { // note navigation pprop
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-
   // for datepicker only'
   const [date, setDate] = useState(new Date());
-  const [checked, setChecked] = React.useState(false);
   const [value, setValue] = React.useState('first');
+  const nextScreenName = 'ScreenCreateTasks3'
+  
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -23,7 +22,6 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
 
       <View style={styles.card}>
 
-      
         <Text style={styles.title}>Does this task have a set due date? </Text>
 
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
@@ -40,11 +38,7 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
-      
+      <NextButton navigation={navigation} screenName={nextScreenName} active={true} />
 
     </View>
     

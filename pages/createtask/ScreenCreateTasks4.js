@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import DatePicker from 'react-native-datepicker';
 import { RadioButton  } from 'react-native-paper';
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import BackButton from './backButton';
+import NextButton from "./nextButton";
 
 export default function ScreenCreateTasks4({ navigation }) { // note navigation pprop
   const [value, setValue] = React.useState('first');
+  const nextScreenName = 'ScreenCreateTasks5';
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -41,10 +41,7 @@ export default function ScreenCreateTasks4({ navigation }) { // note navigation 
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks5')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
+      <NextButton navigation={navigation} screenName={nextScreenName} active={true} />
       
 
     </View>

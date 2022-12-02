@@ -6,15 +6,15 @@ import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import BackButton from './backButton';
+import NextButton from "./nextButton";
 
 export default function ScreenCreateTasks5({ navigation }) { // note navigation pprop
-
-  // for datepicker only'
   const [valueHours, setValueHours] = React.useState(0);
-  const [valueMins, setValueMins] = React.useState(0);
-
-
-  
+  const nextScreenName = "ScreenCreateTasksComplete";
+  let active = false;
+  if (valueHours != 0) {
+    active = true;
+  }
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -23,7 +23,6 @@ export default function ScreenCreateTasks5({ navigation }) { // note navigation 
 
       <View style={styles.card}>
 
-      
         <Text style={[styles.title, {marginBottom: 15}]}>How do you want to split up your work sessions? </Text>
 
         <View style={{flexDirection: 'row', alignItems: 'center', marginVertical:10}}>
@@ -45,11 +44,7 @@ export default function ScreenCreateTasks5({ navigation }) { // note navigation 
 
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Finish</Text></View>
-      </Pressable>
-      
+      <NextButton navigation={navigation} screenName={nextScreenName} active={active} />
 
     </View>
     

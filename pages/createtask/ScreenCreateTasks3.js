@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import { Dimensions } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-import { RadioButton  } from 'react-native-paper';
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import BackButton from './backButton';
+import NextButton from "./nextButton";
 
 export default function ScreenCreateTasks3({ navigation }) { // note navigation pprop
-
-  // for datepicker only'
+  const nextScreenName = "ScreenCreateTasks4";
   const [valueHours, setValueHours] = React.useState(0);
   const [valueMins, setValueMins] = React.useState(0);
-
-
-  
+  let active = false;
+  if (valueHours != 0 || valueMins != 0) {
+    active = true;
+  }
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -24,7 +22,6 @@ export default function ScreenCreateTasks3({ navigation }) { // note navigation 
       <BackButton navigation={navigation} />
 
       <View style={styles.card}>
-
       
         <Text style={[styles.title, {marginBottom: 15}]}>How much time do you want for this task? </Text>
 
@@ -53,11 +50,7 @@ export default function ScreenCreateTasks3({ navigation }) { // note navigation 
         <Text style={{fontFamily: 'Poppins', fontSize: 16}}>{valueMins} minutes</Text>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
-      
+      <NextButton navigation={navigation} screenName={nextScreenName} active={active} />
 
     </View>
     

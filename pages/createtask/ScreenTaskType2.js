@@ -17,7 +17,7 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
       <Header text={"add task"} />
     
   
-      <BackButton/>
+      <BackButton navigation={navigation}/>
 
       <View style={styles.card}>
 

@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import BackButton from './backButton';
+import NextButton from './nextButton';
 
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 export default function ScreenTaskType({ navigation }) { // note navigation pprop
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-
-  // for datepicker only'
-  const [date, setDate] = useState(new Date());
-  
-  
+  const [text, onChangeText] = React.useState(null);
+  const nextScreenName = 'ScreenCreateTasks2';
+  let active = false;
+  if (text != null) {
+    active = true;
+  }
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -21,32 +21,31 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
 
       <View style={styles.card}>
 
-      
         <Text style={styles.title}>What do you want to call your task? </Text>
   
         <Text style={{ marginTop: 20, width: '100%', fontFamily: 'Poppins', fontSize: 18, color: Themes.colors.darkgray}}> Task Name </Text>
         <View style={{ width: '100%'}}>
           <TextInput
             style={styles.input}
-            onChangeText={onChangeNumber}
-            value={number}
+            onChangeText={onChangeText}
+            value={text}
             placeholder="Ex. CS106A"
-            keyboardType="numeric"
           />
         </View>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks2')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
-      
+      <NextButton navigation={navigation} screenName={nextScreenName} active={active} />
+
 
     </View>
     
   );
 }
 
+      //<Pressable onPress={() => navigation.navigate('ScreenCreateTasks2')}>
+        //<View style={styles.button} >
+        //<Text style={styles.buttontext}>Next</Text></View>
+      //</Pressable>
 const styles = StyleSheet.create({
   screen: {
     flex: 1, 
@@ -104,9 +103,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 20,
     borderRadius: 7,
-    color: 'dark-grey',
+    color: Themes.colors.darkgray,
     height: '10%',
     width: '100%',
+    fontFamily: 'Poppins',
   },
 
 
