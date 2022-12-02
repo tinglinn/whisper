@@ -19,7 +19,7 @@ export default function ScreenCreateTasks3({ navigation }) { // note navigation 
   
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
   
       <BackButton navigation={navigation} />
 

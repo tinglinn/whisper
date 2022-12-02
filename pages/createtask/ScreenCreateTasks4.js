@@ -11,7 +11,7 @@ export default function ScreenCreateTasks4({ navigation }) { // note navigation 
   const [value, setValue] = React.useState('first');
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
 
 
       <BackButton navigation={navigation} />
