@@ -43,12 +43,11 @@ function Tasks({navigation}) {
         <View style={styles.tasks}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>your tasks</Text>
-                <MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={34} />
+                <MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} />
             </View>
             <View style={styles.taskList}>
                 <TaskCard task={'CS106A'} />
                 <TaskCard task={'Psych'} />
-                <TaskCard task={'Taxes'} />
                 <Pressable onPress={() => navigation.navigate('Tasks')}>
                     <View style={{
                         flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         marginLeft: 30,
         marginRight: 30,
-        marginBottom: 60,
+        marginBottom: 40,
         padding: 10,
         borderRadius: 10,
     },
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         paddingLeft: 30,
         paddingRight: 30,
-        paddingBottom: 90,
+        paddingBottom: 30,
         borderWidth: 0.1,
         borderColor: Themes.colors.darkgray
     },

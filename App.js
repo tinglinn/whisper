@@ -26,8 +26,8 @@ import TasksScreen from './pages/task';
 function CalendarScreen() {
   return (
     <SafeAreaView style={styles.screen}>
-      <Header text={"calendar"} />
-      <Text>calendar!</Text>
+      <Header text={"events"} />
+      <Text>events!</Text>
     </SafeAreaView>
   );
 }
@@ -43,25 +43,25 @@ function BottomTabs() {
         tabBarLabelStyle: {fontSize: 12, fontFamily: 'Poppins'} 
       }} >
       <Tab.Screen name="Home" component={HomeScreen} options={{
-        tabBarLabel: 'Home',
+        tabBarLabel: 'home',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home" color={color} size={Themes.fonts.iconSize} />
         ),
       }} />
       <Tab.Screen name="Summary" component={SummaryScreen} options={{
-        tabBarLabel: 'Summary',
+        tabBarLabel: 'summary',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="lightbulb" color={color} size={Themes.fonts.iconSize} />
         ),
       }} />
       <Tab.Screen name="Tasks" component={TasksScreen} options={{
-        tabBarLabel: 'Tasks',
+        tabBarLabel: 'tasks',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="format-list-checks" color={color} size={Themes.fonts.iconSize} />
         ),
       }} />
       <Tab.Screen name="Calendar" component={CalendarScreen} options={{
-        tabBarLabel: 'Calendar',
+        tabBarLabel: 'events',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="calendar-month" color={color} size={Themes.fonts.iconSize} />
         ),

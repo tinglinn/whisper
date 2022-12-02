@@ -68,8 +68,7 @@ function SummaryOverview({navigation}) {
             <Menu navigation={navigation}/>
             <Box title={"most productive day"} times={["monday"]} stats={["3 work sessions", "1 task: CS106A"]} />
             <Box title={"most focused periods"} times={["1-3pm", "7-10pm"]} stats={["Able to achieve 80% of goals scheduled during these times"]} />
-            <Insights insights={["You started the week off on a great note!",
-                "ADHD Insight: periods after meals and exercise are often most productive!"]} />
+            <Insights insights={["Great job getting a headstart to the week - sessions after meals and exercise are most productive!"]} />
         </SafeAreaView>
     );
 }

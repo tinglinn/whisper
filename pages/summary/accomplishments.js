@@ -79,7 +79,7 @@ function Accomplishments({ navigation }) {
             <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
             <Menu navigation={navigation} />
             <AccomplishmentList data={data} title={"accomplishments"} />
-            <Insights insights={["You accomplished 3 tasks more than one day before their due date!"]} />
+            <Insights insights={["Superstar - you accomplished 3 tasks well ahead of their deadline!"]} />
         </SafeAreaView>
     );
 }

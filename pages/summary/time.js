@@ -76,16 +76,47 @@ const data = [
     { name: "Time Estimated for Tasks", stat: 12, trend: "up" },
     { name: "Time Needed for Tasks", stat: 16, trend: "up" }];
 
-
+function TimeEstimation({title}) {
+    return (
+        <View style={styles.box}>
+            <Text style={styles.title}>{title}</Text>
+            <View style={styles.boxBody}>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 8}}>
+                    <Ionicons name="document-text-outline" size={25} />
+                    <Text style={styles.nameText}> total time estimated: </Text>
+                    <Text style={{fontFamily: 'Poppins-SemiBold', fontSize: 18, color: Themes.colors.darkgray}}>12 hrs</Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
+                    <Ionicons name="time-outline" size={25} />
+                    <Text style={styles.nameText}> total time spent: </Text>
+                    <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 18, color: Themes.colors.darkgray }}>16 hrs</Text>
+                </View>
+                <View style={{marginBottom: 20}}>
+                    <Text style={styles.stat}>you underestimated the time needed for:</Text>
+                    <View style={{marginTop: 8, paddingLeft: 20}}>
+                        <Text style={styles.stat}>• CS106A</Text>
+                        <Text style={styles.stat}>• Taxes</Text>
+                    </View>
+                </View>
+                <View>
+                    <Text style={styles.stat}>you overestimated the time needed for:</Text>
+                    <View style={{ marginTop: 8, paddingLeft: 20 }}>
+                        <Text style={styles.stat}>• Psych PSET</Text>
+                        <Text style={styles.stat}>• Reading</Text>
+                    </View>
+                </View>
+            </View>
+        </View>
+    )
+}
 function Time({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"summary"} />
             <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
             <Menu navigation={navigation} />
-            <TimeBreakdown data={data} title={"time management"} />
-            <Insights insights={["You underestimated the time it would take to complete CS106A and Taxes",
-                "Still, your time estimations were 10% more accurate than last week!"]} />
+            <TimeEstimation title={"time estimation"} />
+            <Insights insights={["On average, you underestimate the amount of time it will take for your CS106A task by 3 hours"]} />
         </SafeAreaView>
     );
 }
@@ -130,7 +161,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     boxBody: {
-        flexDirection: 'row',
+        flexDirection: 'col',
         alignContent: 'space-between',
         justifyContent: 'center',
         paddingTop: 25,
