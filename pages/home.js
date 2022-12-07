@@ -19,7 +19,7 @@ function Greeting({greetingText}) {
         <View style={styles.greetingContainer}>
             <LinearGradient colors={[Themes.colors.red, Themes.colors.mediumpurple, Themes.colors.lightpurple]} style={styles.gradient}>
                 <Reminder reminderText={"Beach Trip starts in 2 hours!"}/>
-                <View>
+                <View style={{paddingLeft: 20, paddingRight: 20}}>
                     <Text style={styles.greetingText}>{greetingText}</Text>
                 </View>
             </LinearGradient>
@@ -31,7 +31,7 @@ function TaskCard({ task }) {
     return (
         <View style={{
             width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
-            backgroundColor: Themes.colors.lightpurple, borderRadius: 8,
+            backgroundColor: Themes.colors.mediumpurple, borderRadius: 8,
             justifyContent: 'center'
         }}>
             <Text style={styles.tasksText}>{task}</Text>
@@ -48,7 +48,7 @@ function Tasks({navigation}) {
             <View style={styles.taskList}>
                 <TaskCard task={'CS106A'} />
                 <TaskCard task={'Psych'} />
-                <Pressable onPress={() => navigation.navigate('Tasks')}>
+                <Pressable onPress={() => navigation.navigate('AddTasks')}>
                     <View style={{
                         flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
                         backgroundColor: Themes.colors.background, borderRadius: 8,
@@ -71,7 +71,7 @@ function Tasks({navigation}) {
 function HomeScreen({navigation}) {
     return (
         <SafeAreaView style={styles.screen}>
-            <Greeting greetingText={"good morning, Cole! welcome back!"} />
+            <Greeting greetingText={"good morning, Cole! only one more psych session to go!"} />
             <Tasks navigation={navigation} />
         </SafeAreaView>
     );
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins',
         fontSize: 24,
         lineHeight: 36,
-        color: Themes.colors.darkgray,
+        color: Themes.colors.white,
         textAlign: 'left',
     }
 });

@@ -27,9 +27,9 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
         <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginRight: 25}}>
-            <RadioButton value="first" />
-            <Text style={styles.option}>Yes, it is due... </Text>
-            <DatePicker date={date} onDateChange={setDate} />
+              <RadioButton value="first" />
+              <Text style={styles.option}>Yes, it is due...   </Text>
+              <DatePicker date={date} onDateChange={setDate} />
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10, marginRight: 25}}>
             <RadioButton value="second" />

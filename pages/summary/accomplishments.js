@@ -41,6 +41,9 @@ function AccomplishmentList({data, title}) {
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
+            <View style={{width: '25%', marginLeft: 250}}>
+                <Text style={{ flexShrink: 1, fontFamily: 'Poppins', fontSize: 13, color: Themes.colors.darkgray, textAlign: 'right' }}>Compared to last week</Text>
+            </View>
             <View style={styles.boxBody}>
                 <FlatList data={data} keyExtractor={(item, index) => index} renderItem={renderAccomplishment}
                     ItemSeparatorComponent={() => <View style={{ height: 25 }} />}></FlatList>
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'space-between',
         justifyContent: 'center',
-        paddingTop: 25,
+        paddingTop: 15,
     },
     insightBox: {
         flexDirection: 'column',

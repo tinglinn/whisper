@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
@@ -14,6 +14,7 @@ const Tab = createBottomTabNavigator();
 
 // IMPORT SCREENS
 import TasksScreen from './pages/task';
+import AddTasksScreen from './pages/addTask';
 // function TasksScreen() {
 //   return (
 //     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -34,14 +35,23 @@ function CalendarScreen() {
 
 function BottomTabs() {
   return (
-    <Tab.Navigator initialRouteName="Home"
+    <Tab.Navigator
+      initialRouteName="Home"
       inactiveColor={Themes.colors.darkgray}
-      screenOptions={{
+      screenOptions={({ route }) => ({
+        tabBarButton: [
+          "AddTasks"
+        ].includes(route.name)
+          ? () => {
+            return null;
+          }
+          : undefined,
         tabBarActiveTintColor: Themes.colors.verydark,
         headerShown: false,
-        tabBarStyle: {padding: 8, height: 85},
-        tabBarLabelStyle: {fontSize: 12, fontFamily: 'Poppins'} 
-      }} >
+        tabBarStyle: { padding: 8, height: 85 },
+        tabBarLabelStyle: { fontSize: 12, fontFamily: 'Poppins' } 
+      })}
+    >
       <Tab.Screen name="Home" component={HomeScreen} options={{
         tabBarLabel: 'home',
         tabBarIcon: ({ color }) => (
@@ -66,6 +76,7 @@ function BottomTabs() {
           <MaterialCommunityIcons name="calendar-month" color={color} size={Themes.fonts.iconSize} />
         ),
       }} />
+      <Tab.Screen name="AddTasks" component={AddTasksScreen}/>
   </Tab.Navigator>
   );
 }
