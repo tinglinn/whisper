@@ -17,7 +17,8 @@ import ScreenCreateTasks4 from './createtask/ScreenCreateTasks4';
 import ScreenCreateTasks5 from './createtask/ScreenCreateTasks5';
 import ScreenCreateTasksComplete from './createtask/ScreenCreateTasksComplete';
 
-
+import TasksOverview from './workSession/taskPage';
+import SetGoal from './workSession/setGoal';
 // CREATE A STACK **
 const Stack = createStackNavigator();
 
@@ -27,7 +28,7 @@ export default function App() {
         // SET UP THE NAVIGATION ** 
         <NavigationContainer independent={true} options={{ headerShown: false, }}>
             <Stack.Navigator >
-
+                <Stack.Screen name="TasksOverview" options={{ headerShown: false }} component={TasksOverview} />
                 <Stack.Screen name="ScreenTaskType" options={{ headerShown: false }} component={ScreenTaskType} />
                 <Stack.Screen name="ScreenTaskType2" options={{ headerShown: false }} component={ScreenTaskType2} />
                 <Stack.Screen name="ScreenTaskType3" options={{ headerShown: false }} component={ScreenTaskType3} />
@@ -40,7 +41,8 @@ export default function App() {
                 <Stack.Screen name="ScreenCreateTasksComplete" options={{ headerShown: false }} component={ScreenCreateTasksComplete} />
 
                 <Stack.Screen name="ScreenReviewTaskInfo" options={{ headerShown: false }} component={ScreenReviewTaskInfo} />
-
+    
+                <Stack.Screen name="SetGoal" options={{ headerShown: false }} component={SetGoal} />
 
             </Stack.Navigator>
         </NavigationContainer>

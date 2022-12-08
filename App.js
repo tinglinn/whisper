@@ -7,14 +7,15 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import Themes from './assets/Themes/index';
 import Header from './components/header';
-import SummaryScreen from './pages/summary';
-import HomeScreen from './pages/home';
-
-const Tab = createBottomTabNavigator();
 
 // IMPORT SCREENS
-import TasksScreen from './pages/task';
-import AddTasksScreen from './pages/addTask';
+import TasksScreen from './pages/addTask';
+import SummaryScreen from './pages/summary';
+import HomeScreen from './pages/home';
+import AddTasksScreen from './pages/createtask/ScreenTaskType';
+const Tab = createBottomTabNavigator();
+
+
 // function TasksScreen() {
 //   return (
 //     <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
