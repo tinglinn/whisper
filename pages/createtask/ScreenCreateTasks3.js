@@ -7,8 +7,11 @@ import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
 
-
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 
 export default function ScreenCreateTasks3({ navigation, route} ) { // note navigation pprop
@@ -17,7 +20,16 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
   const [valueHours, setValueHours] = React.useState(0);
   const [valueMins, setValueMins] = React.useState(0);
 
+  useEffect(() => {
+    updateTask()
+  }, [])
 
+  async function updateTask() {
+    const {data, error} = await supabase
+    .from("Tasks")
+    .update({ "Date": params.duedate})
+    .eq("Title", params.title)
+  }
   
   return (
     <View style={styles.screen}>
@@ -58,7 +70,11 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
         <Text>{valueMins} minutes</Text>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4', {
+        title: params.title,
+        hours: valueHours,
+        minutes: valueMins
+      })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>

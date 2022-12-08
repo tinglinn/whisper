@@ -6,6 +6,11 @@ import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
 
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 export default function ScreenTaskType({ navigation, route} ) { // note navigation pprop
   const params = route.params;
@@ -17,13 +22,15 @@ export default function ScreenTaskType({ navigation, route} ) { // note navigati
 
   // delete current task
   async function deleteTask() {
+    
     if (params != null) {
+      console.log("title: ", params.title);
       const { data, error } = await supabase
       .from('Tasks')
       .delete()
       .eq('Title', params.title)
-    console.log("data: ", data)
-    console.log("error: ", error)
+    // console.log("data: ", data)
+    // console.log("error: ", error)
     }
   }
 

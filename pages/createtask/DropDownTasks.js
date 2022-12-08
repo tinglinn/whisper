@@ -4,19 +4,29 @@
   import { Dropdown } from 'react-native-element-dropdown';
   import AntDesign from 'react-native-vector-icons/AntDesign';
 
-  const data = [
-    { label: 'CS106A', value: '1' },
-    { label: 'CS106A', value: '2' },
-    { label: 'CS106A', value: '3' },
-  ];
+  import { supabase } from '../../env/supabase';
+  import 'react-native-url-polyfill/auto'
 
   const DropdownComponent = () => {
     const [value, setValue] = useState(null);
 
+  const [titles, setTitles] = useState([])
+  
+  useEffect(() => {
+    fetchTasks()
+    console.log(titles);
+  }, [])
+  async function fetchTasks() {
+    const {data, error} = await supabase
+      .from("Tasks")
+      .select("*")
+    setTitles(data)
+  }
+
     const renderItem = (item) => {
       return (
         <View style={styles.item}>
-          <Text style={styles.textItem}>{item.label}</Text>
+          <Text style={styles.textItem}>{item.Title}</Text>
           {item.value === value && (
             <AntDesign
               style={styles.icon}
@@ -36,12 +46,12 @@
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
-        data={data}
+        data={titles}
         search
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder="Select item"
+        placeholder="Select Item"
         searchPlaceholder="Search..."
         value={value}
         onChange={item => {

@@ -7,6 +7,11 @@ import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 export default function ScreenCreateTasks2({ navigation, route} ) { // note navigation pprop
   const params = route.params;
@@ -23,8 +28,8 @@ export default function ScreenCreateTasks2({ navigation, route} ) { // note navi
     const {data, error} = await supabase
       .from("Tasks")
       .insert({"Title": params.title})
-    console.log("data: ", data)
-    console.log("error: ", error)
+    // console.log("data: ", data)
+    // console.log("error: ", error)
   }
 
   return (
@@ -32,7 +37,7 @@ export default function ScreenCreateTasks2({ navigation, route} ) { // note navi
       <Header text={"Add Task"} />
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks', {
-        title: params.title,
+        title: params.title
       })}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
       </Pressable>
@@ -55,7 +60,10 @@ export default function ScreenCreateTasks2({ navigation, route} ) { // note navi
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {
+        title: params.title,
+        duedate: date
+      })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>

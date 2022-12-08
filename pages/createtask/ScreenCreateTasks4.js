@@ -7,10 +7,28 @@ import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 export default function ScreenCreateTasks4({ navigation, route} ) { // note navigation pprop
   const [value, setValue] = React.useState('first');
   const params = route.params;
+
+  useEffect(() => {
+    updateTask()
+  }, [])
+
+  async function updateTask() {
+    const {data, error} = await supabase
+    .from("Tasks")
+    .update({ "Minutes": (params.hours * 60 + params.minutes)})
+    .eq("Title", params.title)
+  }
+  
+
   return (
     <View style={styles.screen}>
       <Header text={"Add Task"} />
@@ -45,7 +63,10 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks5')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks5', {
+        title: params.title,
+        priority: value
+      })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>

@@ -7,16 +7,28 @@ import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 
 export default function ScreenCreateTasks5({ navigation, route} ) { // note navigation pprop
   const params = route.params;
   // for datepicker only'
   const [valueHours, setValueHours] = React.useState(0);
-  const [valueMins, setValueMins] = React.useState(0);
 
+  useEffect(() => {
+    updateTask()
+  }, [])
 
+  async function updateTask() {
+    const {data, error} = await supabase
+    .from("Tasks")
+    .update({ "Priority": params.priority})
+    .eq("Title", params.title)
+  }
   
   return (
     <View style={styles.screen}>
@@ -51,7 +63,10 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
 
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete', {
+        title: params.title,
+        numSessions: valueHours
+      })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Finish</Text></View>
       </Pressable>

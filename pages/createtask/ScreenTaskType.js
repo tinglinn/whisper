@@ -9,7 +9,7 @@ import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import DropdownComponent from './DropDownTasks';
 import { Dropdown } from "react-native-element-dropdown";
-
+//import {supabase} from '../../env/supabase';
 
 
 export default function ScreenTaskType({ navigation }) { // note navigation pprop
