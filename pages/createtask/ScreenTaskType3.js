@@ -116,8 +116,8 @@ export default function ScreenTaskType3({ navigation }) { // note navigation ppr
       <View style={styles.button} >
       <Text style={styles.buttontext}>Save and Continue</Text></View>
       </Pressable>
+cube2.transform.Rotate(90.0f, 0.0f, 0.0f, Space.World);
       
-
     </View>
     
   );

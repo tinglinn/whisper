@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from 'react-native-datepicker';
 import { RadioButton  } from 'react-native-paper';
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
 
-export default function ScreenCreateTasks4({ navigation }) { // note navigation pprop
+export default function ScreenCreateTasks4({ navigation, route} ) { // note navigation pprop
   const [value, setValue] = React.useState('first');
+  const params = route.params;
   return (
     <View style={styles.screen}>
       <Header text={"Add Task"} />

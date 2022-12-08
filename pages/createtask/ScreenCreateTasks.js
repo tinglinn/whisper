@@ -1,17 +1,32 @@
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
 
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-export default function ScreenTaskType({ navigation }) { // note navigation pprop
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
 
-  // for datepicker only'
-  const [date, setDate] = useState(new Date());
-  
-  
+export default function ScreenTaskType({ navigation, route} ) { // note navigation pprop
+  const params = route.params;
+  const [text, onChangeText] = React.useState("");
+
+  useEffect(() => {
+    deleteTask()
+  }, [])
+
+  // delete current task
+  async function deleteTask() {
+    if (params != null) {
+      const { data, error } = await supabase
+      .from('Tasks')
+      .delete()
+      .eq('Title', params.title)
+    console.log("data: ", data)
+    console.log("error: ", error)
+    }
+  }
+
   return (
     <View style={styles.screen}>
       <Header text={"Add Task"} />
@@ -27,17 +42,20 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
   
         <Text style={{marginTop: 20, width: '100%'}}> Task Name </Text>
         <View style={{ width: '100%'}}>
+          
           <TextInput
-            style={styles.input}
-            onChangeText={onChangeNumber}
-            value={number}
-            placeholder="Ex. CS106A"
-            keyboardType="numeric"
-          />
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+        placeholder="Ex. CS106A"
+        keyboardType="numeric"
+      />
         </View>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks2')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks2', {
+        title: text,
+      })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>
@@ -103,11 +121,9 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 10,
     borderWidth: 1,
-    padding: 20,
+    padding: 10,
     borderRadius: 7,
-    color: 'dark-grey',
-    height: '10%',
-    width: '100%',
+    color: 'dark-grey'
   },
 
 

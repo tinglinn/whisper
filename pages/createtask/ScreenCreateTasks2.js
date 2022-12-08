@@ -1,31 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from 'react-native-datepicker';
 import { RadioButton  } from 'react-native-paper';
-import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
 
-export default function ScreenCreateTasks2({ navigation }) { // note navigation pprop
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
+export default function ScreenCreateTasks2({ navigation, route} ) { // note navigation pprop
+  const params = route.params;
+  // console.log(params.title);
 
-  // for datepicker only'
   const [date, setDate] = useState(new Date());
-  const [checked, setChecked] = React.useState(false);
   const [value, setValue] = React.useState('first');
+
+  useEffect(() => {
+    insertTask()
+  }, [])
+
+  async function insertTask() {
+    const {data, error} = await supabase
+      .from("Tasks")
+      .insert({"Title": params.title})
+    console.log("data: ", data)
+    console.log("error: ", error)
+  }
+
   return (
     <View style={styles.screen}>
       <Header text={"Add Task"} />
 
-
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks', {
+        title: params.title,
+      })}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
       </Pressable>
 
       <View style={styles.card}>
-
-      
+        
         <Text style={styles.title}>Does this task have a set due date? </Text>
 
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}

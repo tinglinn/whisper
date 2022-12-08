@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
 
 
-
-export default function ScreenCreateTasksComplete({ navigation }) { // note navigation pprop
-
+export default function ScreenCreateTasksComplete({ navigation, route} ) { // note navigation pprop
+  const params = route.params;
   // for datepicker only'
   const [valueHours, setValueHours] = React.useState(0);
   const [valueMins, setValueMins] = React.useState(0);

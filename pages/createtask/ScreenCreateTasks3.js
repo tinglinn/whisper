@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dimensions } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-import { RadioButton  } from 'react-native-paper';
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
 
 
 
 
-export default function ScreenCreateTasks3({ navigation }) { // note navigation pprop
-
+export default function ScreenCreateTasks3({ navigation, route} ) { // note navigation pprop
+  const params = route.params;
   // for datepicker only'
   const [valueHours, setValueHours] = React.useState(0);
   const [valueMins, setValueMins] = React.useState(0);
