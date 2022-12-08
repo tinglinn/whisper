@@ -4,7 +4,8 @@ import { RadioButton  } from 'react-native-paper';
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import BackButton from './backButton';
+import NextButton from "./nextButton";
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
 import { LogBox } from 'react-native';
@@ -29,14 +30,13 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
   }
   
 
+  const nextScreenName = 'ScreenCreateTasks5';
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
 
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
@@ -50,15 +50,15 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
         >
           <View style={[{flexDirection:'row', alignItems: 'center', marginTop: 20,}]}>
             <RadioButton value="first" />
-            <Text>Low</Text>
+            <Text style={styles.option}>Low</Text>
           </View>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
           <RadioButton value="second" />
-            <Text>Medium</Text>
+            <Text style={styles.option} >Medium</Text>
           </View>
           <View style={{flexDirection:'row', alignItems: 'center'}}>
           <RadioButton value="third" />
-            <Text>High</Text>
+            <Text style={styles.option}>High</Text>
           </View>
         </RadioButton.Group>
       </View>
@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -127,6 +128,10 @@ const styles = StyleSheet.create({
     
   },
 
+  option: {
+    fontFamily: "Poppins",
+    fontSize: 16
+  }
 
 });
 //   return (

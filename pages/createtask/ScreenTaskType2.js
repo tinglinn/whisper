@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { Dimensions } from 'react-native';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
@@ -10,19 +8,16 @@ import Slider from '@react-native-community/slider';
 import DropdownComponent from './DropDownTasks';
 import { Dropdown } from "react-native-element-dropdown";
 import DatePicker from 'react-native-datepicker';
-
+import BackButton from "./backButton";
 
 export default function ScreenTaskType({ navigation }) { // note navigation pprop
   const [date, setDate] = useState(new Date());
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
     
-    
-      <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
-
+  
+      <BackButton navigation={navigation}/>
 
       <View style={styles.card}>
 
@@ -52,9 +47,9 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
 
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenTaskType2')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete')}>
+        <View style={styles.button} >
+        <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>
       
 

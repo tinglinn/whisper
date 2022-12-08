@@ -27,22 +27,15 @@ export default function ScreenCreateTasksComplete({ navigation, route} ) { // no
   
   return (
     <View style={styles.screen}>
-    <LinearGradient style={styles.background} colors={[Themes.colors.red, Themes.colors.mediumpurple, Themes.colors.red, Themes.colors.mediumpurple]}>
-    <MaterialCommunityIcons name="checkbox-marked-circle" color={Themes.colors.white} size={50} style={{marginBottom:10}} />
-                <Text style={[styles.title, {marginBottom: 15}]}>Added new task! </Text>
-                <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Your Tasks</Text></View>
-      </Pressable>
-            
-            </LinearGradient>
-      
-      
-
+      <LinearGradient style={styles.background} colors={[Themes.colors.red, Themes.colors.mediumpurple, Themes.colors.red, Themes.colors.mediumpurple]}>
+        <MaterialCommunityIcons name="checkbox-marked-circle" color={Themes.colors.white} size={50} style={{marginBottom:10}} />
+        <Text style={[styles.title, {marginBottom: 15}]}>Added new task! </Text>
+        <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
+          <View style={styles.button} >
+          <Text style={styles.buttontext}>Your Tasks</Text></View>
+        </Pressable>
+      </LinearGradient>
     </View>
-    
-    
-
   );
 }
 
@@ -78,7 +71,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',

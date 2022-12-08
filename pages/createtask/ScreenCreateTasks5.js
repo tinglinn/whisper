@@ -8,16 +8,21 @@ import Slider from '@react-native-community/slider';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
 import { LogBox } from 'react-native';
-
+import BackButton from './backButton';
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
-
+import NextButton from "./nextButton";
 
 export default function ScreenCreateTasks5({ navigation, route} ) { // note navigation pprop
   const params = route.params;
   // for datepicker only'
   const [valueHours, setValueHours] = React.useState(0);
+  const nextScreenName = "ScreenCreateTasksComplete";
+  let active = false;
+  if (valueHours != 0) {
+    active = true;
+  }
 
   useEffect(() => {
     updateTask()
@@ -32,21 +37,17 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
   
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
       
-
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
-      
         <Text style={[styles.title, {marginBottom: 15}]}>How do you want to split up your work sessions? </Text>
 
         <View style={{flexDirection: 'row', alignItems: 'center', marginVertical:10}}>
         <MaterialCommunityIcons name="lightbulb-on-outline" color={Themes.colors.purple} size={20} />
-        <Text style={{color:Themes.colors.purple,}}>Your average work session is 2 hours.</Text>
+        <Text style={{fontFamily: 'Poppins', color:Themes.colors.purple,}}>Your average work session is 2 hours.</Text>
         </View>
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
         <Slider
@@ -59,7 +60,7 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
           minimumTrackTintColor={Themes.colors.purple}
           maximumTrackTintColor={Themes.colors.background}
         />
-        <Text>{valueHours} sessions</Text>
+        <Text style={{ fontFamily: 'Poppins' }}>{valueHours} sessions</Text>
 
       </View>
 
@@ -100,7 +101,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',

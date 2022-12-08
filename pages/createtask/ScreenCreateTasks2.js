@@ -5,65 +5,43 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-import { supabase } from '../../env/supabase';
-import 'react-native-url-polyfill/auto'
-import { LogBox } from 'react-native';
 
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
+export default function ScreenCreateTasks2({ navigation }) { // note navigation pprop
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
 
-export default function ScreenCreateTasks2({ navigation, route} ) { // note navigation pprop
-  const params = route.params;
-  // console.log(params.title);
-
+  // for datepicker only'
   const [date, setDate] = useState(new Date());
   const [value, setValue] = React.useState('first');
-
-  useEffect(() => {
-    insertTask()
-  }, [])
-
-  async function insertTask() {
-    const {data, error} = await supabase
-      .from("Tasks")
-      .insert({"Title": params.title})
-    // console.log("data: ", data)
-    // console.log("error: ", error)
-  }
-
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks', {
-        title: params.title
-      })}>
+
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
       </Pressable>
 
       <View style={styles.card}>
-        
+
+      
         <Text style={styles.title}>Does this task have a set due date? </Text>
 
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
         <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-          <View style={{flexDirection:'row', alignItems: 'center', marginTop: 20,}}>
-            <RadioButton value="first" />
-            <Text>Yes, it is due...  </Text>
-            <DatePicker date={date} onDateChange={setDate} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginRight: 25}}>
+              <RadioButton value="first" />
+              <Text style={styles.option}>Yes, it is due...   </Text>
+              <DatePicker date={date} onDateChange={setDate} />
           </View>
-          <View style={{flexDirection:'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10, marginRight: 25}}>
             <RadioButton value="second" />
-            <Text>No, I don't need to finish it by a set time.</Text>
+            <Text style={styles.option}>No, I don't need to finish it by a set time.</Text>
           </View>
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {
-        title: params.title,
-        duedate: date
-      })}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3')}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>
@@ -76,8 +54,8 @@ export default function ScreenCreateTasks2({ navigation, route} ) { // note navi
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1, 
-    alignItems: 'center', 
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
   },
 
@@ -92,13 +70,14 @@ const styles = StyleSheet.create({
   },
 
   buttontext: {
-  color: 'white',
-  fontFamily: 'Poppins-SemiBold',
+    color: 'white',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
   },
 
- card: {
-    alignItems: 'left', 
+  card: {
+    width: '85%',
+    alignItems: 'left',
     justifyContent: 'center',
     backgroundColor: 'white',
     padding: 30,
@@ -110,19 +89,25 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
     color: Themes.colors.darkgray,
-    
   },
   
   input: {
     marginTop: 10,
     borderWidth: 1,
-    width:'100%',
+    width: '100%',
     padding: 20,
     borderRadius: 7,
     color: 'dark-grey',
     flexDirection: 'row',
     
   },
+
+  option: {
+    flexShrink: 1,
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    color: Themes.colors.black,
+  }
 
 
 });

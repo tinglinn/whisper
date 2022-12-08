@@ -2,6 +2,8 @@ import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-nati
 import React, { useEffect, useState } from "react";
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
+import BackButton from './backButton';
+import NextButton from './nextButton';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
 
@@ -15,6 +17,12 @@ LogBox.ignoreLogs([
 export default function ScreenTaskType({ navigation, route} ) { // note navigation pprop
   const params = route.params;
   const [text, onChangeText] = React.useState("");
+
+  const nextScreenName = 'ScreenCreateTasks2';
+  let active = false;
+  if (text != null) {
+    active = true;
+  }
 
   useEffect(() => {
     deleteTask()
@@ -36,27 +44,23 @@ export default function ScreenTaskType({ navigation, route} ) { // note navigati
 
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
+      <Header text={"add task"} />
 
-      <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
 
-      
         <Text style={styles.title}>What do you want to call your task? </Text>
   
-        <Text style={{marginTop: 20, width: '100%'}}> Task Name </Text>
+        <Text style={{ marginTop: 20, width: '100%', fontFamily: 'Poppins', fontSize: 18, color: Themes.colors.darkgray}}> Task Name </Text>
         <View style={{ width: '100%'}}>
           
           <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-        placeholder="Ex. CS106A"
-        keyboardType="numeric"
-      />
+            style={styles.input}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder="Ex. CS106A"
+          />
         </View>
       </View>
 
@@ -73,6 +77,10 @@ export default function ScreenTaskType({ navigation, route} ) { // note navigati
   );
 }
 
+      //<Pressable onPress={() => navigation.navigate('ScreenCreateTasks2')}>
+        //<View style={styles.button} >
+        //<Text style={styles.buttontext}>Next</Text></View>
+      //</Pressable>
 const styles = StyleSheet.create({
   screen: {
     flex: 1, 
@@ -96,7 +104,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -104,12 +113,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     margin: 20,
   },
-
+ 
   title: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
     color: Themes.colors.darkgray,
-    
   },
   // titleText: {
   //   backgroundColor: 'cornsilk',
@@ -130,7 +138,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 7,
-    color: 'dark-grey'
+    color: Themes.colors.darkgray,
+    height: '10%',
+    width: '100%',
+    fontFamily: 'Poppins',
   },
 
 

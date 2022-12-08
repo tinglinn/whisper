@@ -3,45 +3,40 @@ import { Dimensions } from 'react-native';
 import { Text, View, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
-import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
 import { LogBox } from 'react-native';
-
+import BackButton from './backButton';
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
-
-
+import NextButton from "./nextButton";
 export default function ScreenCreateTasks3({ navigation, route} ) { // note navigation pprop
   const params = route.params;
-  // for datepicker only'
+  const nextScreenName = "ScreenCreateTasks4";
   const [valueHours, setValueHours] = React.useState(0);
   const [valueMins, setValueMins] = React.useState(0);
-
+  let active = false;
+  if (valueHours != 0 || valueMins != 0) {
+    active = true;
+  }
   useEffect(() => {
     updateTask()
   }, [])
-
   async function updateTask() {
     const {data, error} = await supabase
     .from("Tasks")
     .update({ "Date": params.duedate})
     .eq("Title", params.title)
   }
-  
   return (
     <View style={styles.screen}>
-      <Header text={"Add Task"} />
-      
-
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <Header text={"add task"} />
+  
+      <BackButton navigation={navigation} />
 
       <View style={styles.card}>
-
       
         <Text style={[styles.title, {marginBottom: 15}]}>How much time do you want for this task? </Text>
 
@@ -56,7 +51,7 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
           minimumTrackTintColor={Themes.colors.purple}
           maximumTrackTintColor={Themes.colors.background}
         />
-        <Text>{valueHours} hours</Text>
+        <Text style={{fontFamily: 'Poppins', fontSize: 16}}>{valueHours} hours</Text>
         <Slider
           style={{width: (Dimensions.get('window').width - 120), height: 40}}
           value={valueMins}
@@ -67,7 +62,7 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
           minimumTrackTintColor={Themes.colors.purple}
           maximumTrackTintColor={Themes.colors.background}
         />
-        <Text>{valueMins} minutes</Text>
+        <Text style={{fontFamily: 'Poppins', fontSize: 16}}>{valueMins} minutes</Text>
       </View>
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4', {
@@ -108,7 +103,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
- card: {
+  card: {
+    width: '85%',
     alignItems: 'left', 
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -121,7 +117,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 24,
     color: Themes.colors.darkgray,
-    
   },
   
   input: {

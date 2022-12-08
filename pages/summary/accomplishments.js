@@ -4,6 +4,7 @@ import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import DisplayWeek from './displayWeek';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -40,6 +41,9 @@ function AccomplishmentList({data, title}) {
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
+            <View style={{width: '25%', marginLeft: 250}}>
+                <Text style={{ flexShrink: 1, fontFamily: 'Poppins', fontSize: 13, color: Themes.colors.darkgray, textAlign: 'right' }}>Compared to last week</Text>
+            </View>
             <View style={styles.boxBody}>
                 <FlatList data={data} keyExtractor={(item, index) => index} renderItem={renderAccomplishment}
                     ItemSeparatorComponent={() => <View style={{ height: 25 }} />}></FlatList>
@@ -74,10 +78,11 @@ const data = [
 function Accomplishments({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
-            <Header text={"nov 11 - 15"} />
+            <Header text={"summary"} />
+            <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
             <Menu navigation={navigation} />
             <AccomplishmentList data={data} title={"accomplishments"} />
-            <Insights insights={["You accomplished 3 tasks more than one day before their due date!"]} />
+            <Insights insights={["Superstar - you accomplished 3 tasks well ahead of their deadline!"]} />
         </SafeAreaView>
     );
 }
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'space-between',
         justifyContent: 'center',
-        paddingTop: 25,
+        paddingTop: 15,
     },
     insightBox: {
         flexDirection: 'column',
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 25,
         paddingRight: 25,
-        marginTop: windowWidth * 0.32,
+        marginTop: 15,
         marginBottom: 15,
         justifyContent: 'space-between',
         alignItems: 'center',

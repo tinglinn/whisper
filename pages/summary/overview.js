@@ -4,7 +4,7 @@ import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-
+import DisplayWeek from './displayWeek';
 const windowWidth = Dimensions.get('window').width;
 
 function Menu({ navigation }) {
@@ -63,12 +63,12 @@ function Insights({ insights }) {
 function SummaryOverview({navigation}) {
     return (
         <SafeAreaView style={styles.screen}>
-            <Header text={"nov 11 - 15"} />
+            <Header text={"summary"} />
+            <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
             <Menu navigation={navigation}/>
             <Box title={"most productive day"} times={["monday"]} stats={["3 work sessions", "1 task: CS106A"]} />
             <Box title={"most focused periods"} times={["1-3pm", "7-10pm"]} stats={["Able to achieve 80% of goals scheduled during these times"]} />
-            <Insights insights={["You started the week off on a great note!",
-                "ADHD Insight: periods after meals and exercise are often most productive!"]} />
+            <Insights insights={["Great job getting a headstart to the week - sessions after meals and exercise are most productive!"]} />
         </SafeAreaView>
     );
 }
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 25,
         paddingRight: 25,
-        marginTop: windowWidth * 0.32,
+        marginTop: 15,
         marginBottom: 15,
         justifyContent: 'space-between',
         alignItems: 'center',
