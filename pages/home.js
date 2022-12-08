@@ -31,7 +31,7 @@ function TaskCard({ task }) {
     return (
         <View style={{
             width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
-            backgroundColor: Themes.colors.mediumpurple, borderRadius: 8,
+            backgroundColor: Themes.colors.purple, borderRadius: 8,
             justifyContent: 'center'
         }}>
             <Text style={styles.tasksText}>{task}</Text>
