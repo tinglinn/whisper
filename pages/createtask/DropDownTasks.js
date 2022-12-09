@@ -8,7 +8,8 @@
   import 'react-native-url-polyfill/auto'
 
   const DropdownComponent = () => {
-    const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
+  const [selectedTask, setSelected] = useState("");
 
   const [titles, setTitles] = useState([])
   
@@ -27,7 +28,7 @@
       return (
         <View style={styles.item}>
           <Text style={styles.textItem}>{item.Title}</Text>
-          {item.value === value && (
+          {item.value === item.Title && (
             <AntDesign
               style={styles.icon}
               color="black"
@@ -51,14 +52,18 @@
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder="Select Item"
+        placeholder=""
         searchPlaceholder="Search..."
-        value={value}
+        value={selectedTask}
         onChange={item => {
-          setValue(item.value);
+          setSelected(item.Title);
+          console.log(selectedTask);
         }}
         renderLeftIcon={() => (
-          <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+            <Text style={styles.textItem}>{selectedTask}</Text>
+          </View>
         )}
         renderItem={renderItem}
       />
@@ -74,7 +79,7 @@
       borderRadius: 12,
       padding: 12,
       shadowColor: '#000',
-      width: 300,
+      width: 320,
       
       shadowOffset: {
         width: 0,
@@ -95,7 +100,7 @@
       alignItems: 'center',
     },
     textItem: {
-      flex: 1,
+      // flex: 1,
       fontSize: 18,
       fontFamily: 'Poppins',
       

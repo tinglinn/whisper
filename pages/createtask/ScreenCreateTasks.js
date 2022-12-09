@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 7,
     color: Themes.colors.darkgray,
-    height: '10%',
+    //height: '10%',
     width: '100%',
     fontFamily: 'Poppins',
   },

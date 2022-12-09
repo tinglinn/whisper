@@ -1,15 +1,32 @@
-import { Text, View, StyleSheet, SafeAreaView, Dimensions, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, FlatList,SafeAreaView, Dimensions, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Header from '../../components/header';
 import { LinearGradient } from 'expo-linear-gradient';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import Themes from '../../assets/Themes';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
+
+
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+  ]);
 
 // CREATE A STACK **
 const Stack = createStackNavigator();
 const windowWidth = Dimensions.get('window').width;
+
+const renderTask = ({ item, index }) => (
+    <TaskCard task={{ name: item.Title,
+        session: { length: item.Minutes, total: item.NumSessions, completed: item.NumSessionsCompleted },
+        timeDue: {  date: item.date }
+    }}
+        // navigation={navigation} 
+    />
+  );
 
 // each task should be
 // task: {name: , session: {length: , total: , completed: }, timeDue: {date: , day: }}
@@ -41,6 +58,8 @@ function AddTaskButton({ navigation }) {
     )
 }
 
+
+
 function TaskCard({ task, navigation }) {
     const [active, setActive] = React.useState(false);
     let text = null;
@@ -49,6 +68,7 @@ function TaskCard({ task, navigation }) {
     } else {
         text = "start";
     }
+    
     return (
         <View style={styles.box}>
             <LinearGradient colors={[Themes.colors.lightpurple, Themes.colors.white]}>
@@ -60,7 +80,7 @@ function TaskCard({ task, navigation }) {
                     <View style={{ marginTop: 25 }}>
                         <View style={styles.infoLine}>
                             <Feather name="clock" color={Themes.colors.purple} size={24} />
-                            <View style={{ marginLeft: 5 }}><Text style={styles.info}>{task.session.length} hr session ({task.session.completed} of {task.session.total}) </Text></View>
+                            <View style={{ marginLeft: 5 }}><Text style={styles.info}>{Math.floor(task.session.length / 60)} hr session ({task.session.completed} of {task.session.total}) </Text></View>
                         </View>
                         <View style={styles.infoLine}>
                             <Feather name="calendar" color={Themes.colors.purple} size={24} />
@@ -83,6 +103,22 @@ function TaskCard({ task, navigation }) {
 }
     
 export default function TasksOverview({ navigation }) {
+
+
+    const [titles, setTitles] = useState([]) // store data
+
+    useEffect(() => {
+    fetchTasks()
+    console.log(titles);
+  }, [])
+  async function fetchTasks() {
+    const {data, error} = await supabase
+      .from("Tasks")
+      .select("*")
+    setTitles(data)
+    console.log(data)
+  } // populate titles with data
+      
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={'your tasks'} />
@@ -92,11 +128,17 @@ export default function TasksOverview({ navigation }) {
                     <MaterialCommunityIcons name="sort-ascending" color={Themes.colors.darkgray} size={40} />
                     <AddTaskButton navigation={navigation} />
                 </View>
-                <ScrollView style={{ width: '100%' }}>
+                {/* <ScrollView style={{ width: '100%' }}>
                     <TaskCard task={{ name: 'CS106A', session: { length: 4, total: 2, completed: 1 }, timeDue: { day: 'monday', date: '11/5' } }} navigation={navigation} />
                     <TaskCard task={{ name: 'Taxes', session: { length: 2, total: 1, completed: 0 }, timeDue: { day: 'monday', date: '11/5' } }} navigation={navigation} />
                     <TaskCard task={{ name: 'Psych PSET', session: { length: 2, total: 4, completed: 0 }, timeDue: { day: 'monday', date: '11/5' } }} navigation={navigation} />
-                </ScrollView>
+                </ScrollView> */}
+                <FlatList style={{ width: '100%' }}
+                    data={titles} // the array of data that the FlatList displays
+                    renderItem={(item) => renderTask(item)} // function that renders each item
+                    keyExtractor={(item) => item.id} // unique key for each item
+                />
+                
             </View>
         </SafeAreaView>
     );

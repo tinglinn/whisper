@@ -30,7 +30,7 @@ export default function ScreenCreateTasksComplete({ navigation, route} ) { // no
       <LinearGradient style={styles.background} colors={[Themes.colors.red, Themes.colors.mediumpurple, Themes.colors.red, Themes.colors.mediumpurple]}>
         <MaterialCommunityIcons name="checkbox-marked-circle" color={Themes.colors.white} size={50} style={{marginBottom:10}} />
         <Text style={[styles.title, {marginBottom: 15}]}>Added new task! </Text>
-        <Pressable onPress={() => navigation.navigate('ScreenTaskType')}>
+        <Pressable onPress={() => navigation.navigate('TasksOverview')}>
           <View style={styles.button} >
           <Text style={styles.buttontext}>Your Tasks</Text></View>
         </Pressable>

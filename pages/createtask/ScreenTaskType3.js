@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Dimensions } from 'react-native';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
-import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import DatePicker from 'react-native-datepicker';
 import { RadioButton  } from 'react-native-paper';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
 
 
 export default function ScreenTaskType3({ navigation }) { // note navigation pprop
@@ -117,7 +117,6 @@ export default function ScreenTaskType3({ navigation }) { // note navigation ppr
       <View style={styles.button} >
       <Text style={styles.buttontext}>Save and Continue</Text></View>
       </Pressable>
-cube2.transform.Rotate(90.0f, 0.0f, 0.0f, Space.World);
       
     </View>
     

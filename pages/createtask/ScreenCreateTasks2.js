@@ -6,7 +6,9 @@ import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
-export default function ScreenCreateTasks2({ navigation }) { // note navigation pprop
+export default function ScreenCreateTasks2({ navigation, route}) { // note navigation pprop
+  const params = route.params;
+
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState(null);
 
@@ -41,7 +43,7 @@ export default function ScreenCreateTasks2({ navigation }) { // note navigation 
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {title: params.title, duedate: date})}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>
