@@ -19,34 +19,15 @@ LogBox.ignoreLogs([
 const Stack = createStackNavigator();
 const windowWidth = Dimensions.get('window').width;
 
-const renderTask = ({ item, index }) => (
+const renderTask = ( item, navigation ) => (
     <TaskCard task={{ name: item.Title,
         session: { length: item.Minutes, total: item.NumSessions, completed: item.NumSessionsCompleted },
-        timeDue: {  date: item.date }
-    }}
-        // navigation={navigation} 
-    />
+        timeDue: { date: item.date }
+    }} navigation={navigation} />
   );
 
 // each task should be
 // task: {name: , session: {length: , total: , completed: }, timeDue: {date: , day: }}
-
-function PlayButton({ active }) {
-    let text = null;
-    if (active) {
-        text = "resume";
-    } else {
-        text = "start";
-    }
-    return (
-        <Pressable>
-            <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
-                <Feather name="play-circle" color='white' size={28} />
-                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
-            </View>
-        </Pressable>
-    )
-}
 
 function AddTaskButton({ navigation }) {
     return (
@@ -84,7 +65,7 @@ function TaskCard({ task, navigation }) {
                         </View>
                         <View style={styles.infoLine}>
                             <Feather name="calendar" color={Themes.colors.purple} size={24} />
-                            <View style={{ marginLeft: 5 }}><Text style={styles.info}>{task.timeDue.day} {task.timeDue.date}</Text></View>
+                            <View style={{ marginLeft: 5 }}><Text style={styles.info}> {task.timeDue.date}</Text></View>
                         </View>
                     </View>
                 </View>
@@ -103,8 +84,6 @@ function TaskCard({ task, navigation }) {
 }
     
 export default function TasksOverview({ navigation }) {
-
-
     const [titles, setTitles] = useState([]) // store data
 
     useEffect(() => {
@@ -135,8 +114,8 @@ export default function TasksOverview({ navigation }) {
                 </ScrollView> */}
                 <FlatList style={{ width: '100%' }}
                     data={titles} // the array of data that the FlatList displays
-                    renderItem={(item) => renderTask(item)} // function that renders each item
-                    keyExtractor={(item) => item.id} // unique key for each item
+                    renderItem={({ item }) => renderTask(item, navigation)} // function that renders each item
+                    keyExtractor={(item, index) => index} // unique key for each item
                 />
                 
             </View>
