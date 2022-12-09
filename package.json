@@ -24,6 +24,7 @@
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-datepicker": "^1.7.2",
+    "react-native-drop-shadow": "^0.0.6",
     "react-native-element-dropdown": "^2.4.0",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-immersive-bars": "^1.0.4",

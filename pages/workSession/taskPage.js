@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
 import { LogBox } from 'react-native';
+import DropShadow from "react-native-drop-shadow";
 
 
 LogBox.ignoreLogs([
@@ -51,35 +52,45 @@ function TaskCard({ task, navigation }) {
     }
     
     return (
-        <View style={styles.box}>
-            <LinearGradient colors={[Themes.colors.lightpurple, Themes.colors.white]}>
-                <View style={styles.infoBox}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text style={styles.title}>{task.name}</Text>
-                        <Pressable><Text style={styles.mark}>mark as done</Text></Pressable>
-                    </View>
-                    <View style={{ marginTop: 25 }}>
-                        <View style={styles.infoLine}>
-                            <Feather name="clock" color={Themes.colors.purple} size={24} />
-                            <View style={{ marginLeft: 5 }}><Text style={styles.info}>{Math.floor(task.session.length / 60)} hr session ({task.session.completed} of {task.session.total}) </Text></View>
+        <DropShadow style={{
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 1,
+                height: 1,
+            },
+            shadowOpacity: 0.2,
+            shadowRadius: 2,
+        }}>
+            <View style={styles.box}>
+                <LinearGradient colors={[Themes.colors.lightpurple, Themes.colors.white]}>
+                    <View style={styles.infoBox}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Text style={styles.title}>{task.name}</Text>
+                            <Pressable><Text style={styles.mark}>mark as done</Text></Pressable>
                         </View>
-                        <View style={styles.infoLine}>
-                            <Feather name="calendar" color={Themes.colors.purple} size={24} />
-                            <View style={{ marginLeft: 5 }}><Text style={styles.info}> {task.timeDue.date}</Text></View>
+                        <View style={{ marginTop: 25 }}>
+                            <View style={styles.infoLine}>
+                                <Feather name="clock" color={Themes.colors.purple} size={24} />
+                                <View style={{ marginLeft: 5 }}><Text style={styles.info}>{Math.floor(task.session.length / 60)} hr session ({task.session.completed} of {task.session.total}) </Text></View>
+                            </View>
+                            <View style={styles.infoLine}>
+                                <Feather name="calendar" color={Themes.colors.purple} size={24} />
+                                <View style={{ marginLeft: 5 }}><Text style={styles.info}> {task.timeDue.date}</Text></View>
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
-                        <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
-                            <Feather name="play-circle" color='white' size={28} />
-                            <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
-                        </View>
-                    </Pressable>
-                </View>
-            </LinearGradient>
-        </View>
+                    <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
+                            <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
+                                <Feather name="play-circle" color='white' size={28} />
+                                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                </LinearGradient>
+            </View>
+        </DropShadow>
     );
 }
     

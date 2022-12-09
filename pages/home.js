@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons, SimpleLineIcons } from '@expo/vector-icons';
 import Themes from '../assets/Themes/index';
+import DropShadow from "react-native-drop-shadow";
 
 function Reminder({reminderText}) {
     return (
@@ -29,17 +30,28 @@ function Greeting({greetingText}) {
 
 function TaskCard({ task }) {
     return (
-        <View style={{
-            width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
-            backgroundColor: Themes.colors.purple, borderRadius: 8,
-            justifyContent: 'center'
+        <DropShadow style={{
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 3,
         }}>
-            <Text style={styles.tasksText}>{task}</Text>
-        </View>
+            <View style={{
+                width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
+                backgroundColor: Themes.colors.purple, borderRadius: 8,
+                justifyContent: 'center'
+            }}>
+                <Text style={styles.tasksText}>{task}</Text>
+            </View>
+        </DropShadow>
     )
 }
 function Tasks({navigation}) {
     return (
+        
         <View style={styles.tasks}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>your tasks</Text>
@@ -49,15 +61,24 @@ function Tasks({navigation}) {
                 <TaskCard task={'CS106A'} />
                 <TaskCard task={'Psych'} />
                 <Pressable onPress={() => navigation.navigate('AddTasks')}>
-                    <View style={{
+                    <DropShadow style={{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                        },
+                        shadowOpacity: 0.35,
+                        shadowRadius: 3,
+                    }}><View style={{
                         flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
                         backgroundColor: Themes.colors.background, borderRadius: 8,
-                    }}>
-                        <Text
-                            style={{fontFamily: 'Poppins', fontSize: 24, color: Themes.colors.darkgray, textAlign: 'left',}}>
-                            + add task
-                        </Text>
-                    </View>
+                        }}>
+                            <Text
+                                style={{fontFamily: 'Poppins', fontSize: 24, color: Themes.colors.darkgray, textAlign: 'left',}}>
+                                + add task
+                            </Text>
+                        </View>
+                    </DropShadow>
                 </Pressable>
             </View>
         </View>

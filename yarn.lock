@@ -6147,6 +6147,13 @@
   dependencies:
     "moment" "^2.22.0"
 
+"react-native-drop-shadow@^0.0.6":
+  "integrity" "sha512-eIFZoU7yhr90xB0/Gfuolt/Eelk0F+ohy3piutuYFA+xJx1xtJ/t9xWaaTPwTGXK+56CTnp8mAX4VPDz464NZg=="
+  "resolved" "https://registry.npmjs.org/react-native-drop-shadow/-/react-native-drop-shadow-0.0.6.tgz"
+  "version" "0.0.6"
+  dependencies:
+    "logkitty" "^0.7.1"
+
 "react-native-element-dropdown@^2.4.0":
   "integrity" "sha512-xdwOWMsPnlICe/dvgE8aYySBF9DJE+dJqqoVFd6+vAtP+IbCDhkEZdbrgwn72c9ukFNzE4Tg8+gGCGqrN5XwrA=="
   "resolved" "https://registry.npmjs.org/react-native-element-dropdown/-/react-native-element-dropdown-2.4.0.tgz"

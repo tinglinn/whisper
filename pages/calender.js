@@ -7,9 +7,11 @@ const windowWidth = Dimensions.get('window').width;
 
 function Button({text}) {
     return (
-        <View style={styles.button}>
-            <Text style={styles.buttonText}>{text}</Text>
-        </View>
+        <Pressable>
+            <View style={styles.button}>
+                <Text style={styles.buttonText}>{text}</Text>
+            </View>
+        </Pressable>
     )
 }
 
