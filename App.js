@@ -14,7 +14,8 @@ import SummaryScreen from './pages/summary';
 import HomeScreen from './pages/home';
 import AddTasksScreen from './pages/createtask/ScreenTaskType';
 import CalendarScreen from './pages/calender';
-
+import SetGoal from './pages/workSession/setGoal';
+import Timer from './pages/workSession/timer';
 const Tab = createBottomTabNavigator();
 
 
@@ -35,7 +36,9 @@ function BottomTabs() {
       inactiveColor={Themes.colors.darkgray}
       screenOptions={({ route }) => ({
         tabBarButton: [
-          "AddTasks"
+          "AddTasks",
+          "SetGoal",
+          "Timer"
         ].includes(route.name)
           ? () => {
             return null;
@@ -59,7 +62,7 @@ function BottomTabs() {
           <MaterialCommunityIcons name="lightbulb" color={color} size={Themes.fonts.iconSize} />
         ),
       }} />
-      <Tab.Screen name="Tasks" component={TasksScreen} options={{
+      <Tab.Screen name="TasksOverview" component={TasksScreen} options={{
         tabBarLabel: 'tasks',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="format-list-checks" color={color} size={Themes.fonts.iconSize} />
@@ -71,7 +74,9 @@ function BottomTabs() {
           <MaterialCommunityIcons name="calendar-month" color={color} size={Themes.fonts.iconSize} />
         ),
       }} />
-      <Tab.Screen name="AddTasks" component={AddTasksScreen}/>
+      <Tab.Screen name="AddTasks" component={AddTasksScreen} />
+      <Tab.Screen name="SetGoal" component={SetGoal} />
+      <Tab.Screen name="Timer" component={Timer} />
   </Tab.Navigator>
   );
 }

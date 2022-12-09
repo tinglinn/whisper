@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -28,7 +28,7 @@ function Greeting({greetingText}) {
     );
 }
 
-function TaskCard({ task }) {
+function TaskCard({ task, navigation }) {
     return (
         <DropShadow style={{
             shadowColor: "#000",
@@ -39,27 +39,40 @@ function TaskCard({ task }) {
             shadowOpacity: 0.5,
             shadowRadius: 3,
         }}>
-            <View style={{
-                width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
-                backgroundColor: Themes.colors.purple, borderRadius: 8,
-                justifyContent: 'center'
-            }}>
-                <Text style={styles.tasksText}>{task}</Text>
-            </View>
+            <Pressable onPress={() => navigation.navigate("SetGoal", {name: task})}>
+                <View style={{
+                    width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
+                    backgroundColor: Themes.colors.purple, borderRadius: 8,
+                    justifyContent: 'center'
+                }}>
+                    <Text style={styles.tasksText}>{task}</Text>
+                </View>
+            </Pressable>
         </DropShadow>
     )
 }
-function Tasks({navigation}) {
+
+function DisplayMessage() {
     return (
-        
+        <Text>check</Text>
+    )
+}
+function Tasks({ navigation }) {
+    const [display, setDisplay] = useState(false)
+    let message = display ? <View style={styles.message}><Text style={styles.messageText}>Click on a task to begin a new session!</Text></View> : null;
+    return (
         <View style={styles.tasks}>
+            {message}
             <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>your tasks</Text>
-                <Pressable onPress={() => navigation.navigate("Tasks")}><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} /></Pressable>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
+                    <Text style={styles.titleText}>your tasks</Text>
+                    <Pressable style={{marginLeft: 5}} onPress={() => setDisplay(!display)}><MaterialCommunityIcons name="information-outline" color={Themes.colors.darkgray} size={24} /></Pressable>
+                </View>
+                <Pressable onPress={() => navigation.navigate("TasksOverview")}><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} /></Pressable>
             </View>
             <View style={styles.taskList}>
-                <TaskCard task={'CS106A'} />
-                <TaskCard task={'Psych'} />
+                <TaskCard task={'CS106A'} navigation={navigation} />
+                <TaskCard task={'Psych'} navigation={navigation} />
                 <Pressable onPress={() => navigation.navigate('AddTasks')}>
                     <DropShadow style={{
                         shadowColor: "#000",
@@ -143,6 +156,24 @@ const styles = StyleSheet.create({
         paddingRight: 35,
         textAlign: 'center',
         alignItems: 'center',
+    },
+    message: {
+        marginLeft: 100,
+        marginTop: 10,
+        padding: 3,
+        position: 'absolute',
+        backgroundColor: Themes.colors.darkgray,
+        borderRadius: 8,
+        width: 250,
+        height: 25,
+        opacity: 0.7,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    messageText: {
+        fontFamily: 'Poppins',
+        fontSize: 12,
+        color: 'white'
     },
     tasks: {
         flex: 1,
