@@ -23,17 +23,6 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
   if (valueHours != 0) {
     active = true;
   }
-
-  useEffect(() => {
-    updateTask()
-  }, [])
-
-  async function updateTask() {
-    const {data, error} = await supabase
-    .from("Tasks")
-    .update({ "Priority": params.priority})
-    .eq("Title", params.title)
-  }
   
   return (
     <View style={styles.screen}>
@@ -65,8 +54,12 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
       </View>
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete', {
+        numSessions: valueHours,
+        priority: params.priority,
         title: params.title,
-        numSessions: valueHours
+        duedate: params.date,
+        hours: params.hours,
+        minutes: params.minutes,
       })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Finish</Text></View>

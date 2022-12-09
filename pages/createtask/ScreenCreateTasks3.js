@@ -21,15 +21,6 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
   if (valueHours != 0 || valueMins != 0) {
     active = true;
   }
-  useEffect(() => {
-    updateTask()
-  }, [])
-  async function updateTask() {
-    const {data, error} = await supabase
-    .from("Tasks")
-    .update({ "Date": params.duedate})
-    .eq("Title", params.title)
-  }
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -67,6 +58,7 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4', {
         title: params.title,
+        duedate: params.date,
         hours: valueHours,
         minutes: valueMins
       })}>

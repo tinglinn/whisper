@@ -18,17 +18,6 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
   const [value, setValue] = React.useState('first');
   const params = route.params;
 
-  useEffect(() => {
-    updateTask()
-  }, [])
-
-  async function updateTask() {
-    const {data, error} = await supabase
-    .from("Tasks")
-    .update({ "Minutes": (params.hours * 60 + params.minutes)})
-    .eq("Title", params.title)
-  }
-  
 
   const nextScreenName = 'ScreenCreateTasks5';
   return (
@@ -64,8 +53,11 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
       </View>
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks5', {
+        priority: value,
         title: params.title,
-        priority: value
+        duedate: params.date,
+        hours: params.hours,
+        minutes: params.minutes,
       })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>

@@ -24,23 +24,6 @@ export default function ScreenTaskType({ navigation, route} ) { // note navigati
     active = true;
   }
 
-  useEffect(() => {
-    deleteTask()
-  }, [])
-
-  // delete current task
-  async function deleteTask() {
-    
-    if (params != null) {
-      console.log("title: ", params.title);
-      const { data, error } = await supabase
-      .from('Tasks')
-      .delete()
-      .eq('Title', params.title)
-    // console.log("data: ", data)
-    // console.log("error: ", error)
-    }
-  }
 
   return (
     <View style={styles.screen}>

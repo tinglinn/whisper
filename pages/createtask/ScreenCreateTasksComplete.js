@@ -15,13 +15,22 @@ export default function ScreenCreateTasksComplete({ navigation, route} ) { // no
   const params = route.params;
 
   useEffect(() => {
+    insertTask()
     updateTask()
   }, [])
 
+  async function insertTask() {
+    const {data, error} = await supabase
+    .from("Tasks")
+    .insert({"Title": params.title})
+  }
   async function updateTask() {
     const {data, error} = await supabase
     .from("Tasks")
     .update({ "NumSessions": params.numSessions})
+    .update({ "date": params.date})
+    .update({ "Minutes": params.hours * 60 + params.minutes})
+    .update({ "Priority": params.priority})
     .eq("Title", params.title)
   }
   

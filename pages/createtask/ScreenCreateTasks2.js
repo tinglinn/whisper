@@ -5,6 +5,7 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { supabase } from '../../env/supabase';
 
 export default function ScreenCreateTasks2({ navigation, route}) { // note navigation pprop
   const params = route.params;
@@ -15,6 +16,9 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
   // for datepicker only'
   const [date, setDate] = useState(new Date());
   const [value, setValue] = React.useState('first');
+
+  
+
   return (
     <View style={styles.screen}>
       <Header text={"add task"} />
@@ -43,7 +47,10 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {title: params.title, duedate: date})}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {
+        title: params.title,
+        duedate: date
+      })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
       </Pressable>
