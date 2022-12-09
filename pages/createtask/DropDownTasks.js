@@ -8,21 +8,20 @@
   import 'react-native-url-polyfill/auto'
 
   const DropdownComponent = () => {
-  const [value, setValue] = useState("");
-  const [selectedTask, setSelected] = useState("");
+    const [selectedTask, setSelected] = useState("");
 
-  const [titles, setTitles] = useState([])
-  
-  useEffect(() => {
-    fetchTasks()
-    console.log(titles);
-  }, [])
-  async function fetchTasks() {
-    const {data, error} = await supabase
-      .from("Tasks")
-      .select("*")
-    setTitles(data)
-  }
+    const [titles, setTitles] = useState([])
+    
+    useEffect(() => {
+      fetchTasks()
+      console.log(titles);
+    }, [])
+    async function fetchTasks() {
+      const {data, error} = await supabase
+        .from("Tasks")
+        .select("*")
+      setTitles(data)
+    }
 
     const renderItem = (item) => {
       return (

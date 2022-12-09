@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
@@ -7,9 +7,16 @@ import DatePicker from 'react-native-datepicker';
 import { RadioButton  } from 'react-native-paper';
 import { supabase } from '../../env/supabase';
 import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+  'DatePickerIOS has been merged with DatePickerAndroid',
+]);
 
-export default function ScreenTaskType3({ navigation }) { // note navigation pprop
+export default function ScreenTaskType3({ navigation, route }) { // note navigation pprop
+  const params = route.params;
+  
   const [date, setDate] = useState(new Date());
 
   const [valueHours, setValueHours] = React.useState(0);
@@ -17,6 +24,31 @@ export default function ScreenTaskType3({ navigation }) { // note navigation ppr
   const [valueSessions, setValueSessions] = React.useState(0);
   
   const [value, setValue] = React.useState('first');
+
+  const [titles, setTitles] = useState([])
+  
+  useEffect(() => {
+    fetchTasks()
+    //console.log("data: ", params.data);
+    //console.log("titles: ", params.task)
+  }, [])
+  async function fetchTasks() {
+    const {data, error} = await supabase
+      .from("Tasks")
+      .select("*")
+      .eq("Title", params.task)
+    setTitles(data)
+    console.log("titles: ", titles[0])
+
+    setDate(titles[0].Date);
+    setValue(titles[0].Priority);
+    setValueHours(Math.floor(titles[0].Minutes / 60));
+    setValueMins(titles[0].Minutes % 60);
+    setValueSessions(titles[0].NumSessions);
+    console.log("date: ", date, "priority: ", value, "num sesh: ", valueSessions, "minutes: ", valueMins, "hours: ", valueHours);
+    // console.log("date: ", date);
+  }
+
   return (
     <View style={styles.screen}>
     
@@ -31,8 +63,8 @@ export default function ScreenTaskType3({ navigation }) { // note navigation ppr
       <View style={styles.card}>
 
         <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20}}>
-          <Text style={[styles.title]}>Edit CS106A:</Text>
-          <Pressable onPress={() => navigation.navigate('ScreenTaskType3')}><MaterialCommunityIcons style={styles.clickable_icon} name="pencil-circle" color={Themes.colors.darkgray} size={30} /></Pressable>
+          <Text style={[styles.title]}>Review CS106A:</Text>
+          {/* <Pressable onPress={() => navigation.navigate('ScreenTaskType3')}><MaterialCommunityIcons style={styles.clickable_icon} name="pencil-circle" color={Themes.colors.darkgray} size={30} /></Pressable> */}
         </View>
         
         <View style={styles.statItem}>
@@ -113,9 +145,16 @@ export default function ScreenTaskType3({ navigation }) { // note navigation ppr
 
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenTaskType2')}>
+      <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete', {
+        numSessions: valueSessions,
+        priority: value,
+        title: params.task,
+        duedate: date,
+        hours: valueHours,
+        minutes: valueMins
+      })}>
       <View style={styles.button} >
-      <Text style={styles.buttontext}>Save and Continue</Text></View>
+      <Text style={styles.buttontext}>Save and Add</Text></View>
       </Pressable>
       
     </View>

@@ -45,7 +45,12 @@ function Timer({ route, navigation }) {
                             <Text style={styles.buttonText}>{isRunning ? "Pause" : "Resume"}</Text>
                         </View>
                     </Pressable>
-                    <Pressable onPress={() => navigation.navigate("TasksOverview")}>
+                    <Pressable onPress={() => navigation.navigate("TasksOverview", {
+                        hours: hours,
+                        minutes: minutes,
+                        title: params.title
+                    
+                        })}>
                         <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                             <MaterialCommunityIcons name="check-circle" color={Themes.colors.purple} size={60} />
                             <Text style={styles.buttonText}>Finish Session</Text>
