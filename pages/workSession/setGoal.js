@@ -7,7 +7,7 @@ import BackButton from '../createtask/backButton';
 function SetGoal({ route, navigation }) {
     const [text, onChangeText] = React.useState(null);
     const { name } = route.params;
-
+    console.log("in set goal", route.params);
     return (
         <View style={styles.screen}>
             <Header text={name} />
@@ -18,14 +18,14 @@ function SetGoal({ route, navigation }) {
                     <TextInput
                         style={styles.input}
                         onChangeText={onChangeText}
-                        value={text}
                         placeholder="The goal I will reach is..."
+                        value={text}
                         multiline={true}
                     />
                 </View>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
-                <Pressable>
+                <Pressable onPress={() => navigation.navigate("Timer", {task: name, goal: text})}>
                     <View style={styles.button}>
                         <Text style={styles.buttontext}>start timer</Text>
                     </View>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins',
         backgroundColor: 'rgba(217, 217, 217, 0.2)',
     },
-
-
 });
+
 export default SetGoal;

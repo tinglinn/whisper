@@ -19,6 +19,7 @@ import ScreenCreateTasksComplete from './createtask/ScreenCreateTasksComplete';
 
 import TasksOverview from './workSession/taskPage';
 import SetGoal from './workSession/setGoal';
+import Timer from './workSession/timer';
 // CREATE A STACK **
 const Stack = createStackNavigator();
 
@@ -43,7 +44,7 @@ export default function App() {
                 <Stack.Screen name="ScreenReviewTaskInfo" options={{ headerShown: false }} component={ScreenReviewTaskInfo} />
     
                 <Stack.Screen name="SetGoal" options={{ headerShown: false }} component={SetGoal} />
-
+                <Stack.Screen name="Timer" options={{ headerShown: false }} component={Timer} />
             </Stack.Navigator>
         </NavigationContainer>
 
