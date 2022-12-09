@@ -43,7 +43,7 @@ function Tasks({navigation}) {
         <View style={styles.tasks}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>your tasks</Text>
-                <MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} />
+                <Pressable onPress={() => navigation.navigate("Tasks")}><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} /></Pressable>
             </View>
             <View style={styles.taskList}>
                 <TaskCard task={'CS106A'} />
