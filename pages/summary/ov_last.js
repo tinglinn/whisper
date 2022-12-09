@@ -3,53 +3,43 @@ import { StyleSheet, Text, View, FlatList, Dimensions, Pressable } from 'react-n
 import Themes from '../../assets/Themes/index';
 import Header from '../../components/header';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import DisplayWeek from './displayWeek';
-
 const windowWidth = Dimensions.get('window').width;
 
 function Menu({ navigation }) {
     return (
         <View style={styles.menu}>
-            <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Overview</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Accomplishments")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Accomplishments</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Time")}><Text style={styles.menuText}>Time</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("PrevOverview")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Overview</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("PrevAccomplishments")}><Text style={styles.menuText}>Accomplishments</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("PrevTime")}><Text style={styles.menuText}>Time</Text></Pressable>
         </View>
     );
 }
 
-function renderAccomplishment({ item }) {
-    const name = item.name;
-    const stat = item.stat;
-    const trend = item.trend;
-    let icon = null;
-    if (trend == "up") {
-        icon = <Ionicons name="ios-arrow-up-circle-outline" color={Themes.colors.darkgray} size={24} />
-    } else {
-        icon = <Ionicons name="ios-arrow-down-circle-outline" color={Themes.colors.darkgray} size={24} />
-    }
+function renderStat({ item }) {
     return (
-        <View style={styles.accomplishItem}>
-            <View style={{width: '65%'}}><Text style={styles.nameText}>{name}</Text></View>
-            <View style={{ width: '20%', alignItems: 'flex-end' }}><Text style={styles.statText}>{stat}</Text></View>
-            {icon}
+        <View style={styles.statItem}>
+            <MaterialCommunityIcons name="bookmark-check-outline" color={Themes.colors.darkgray} size={20} />
+            <View style={{ marginLeft: 6 }}><Text style={styles.stat}>{item}</Text></View>
         </View>
-    )
+    );
 }
 
-function AccomplishmentList({data, title}) {
+function Box({ title, times, stats }) {
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
-            <View style={{width: '25%', marginLeft: 250}}>
-                <Text style={{ flexShrink: 1, fontFamily: 'Poppins', fontSize: 13, color: Themes.colors.darkgray, textAlign: 'right' }}>Compared to last week</Text>
-            </View>
             <View style={styles.boxBody}>
-                <FlatList data={data} keyExtractor={(item, index) => index} renderItem={renderAccomplishment}
-                    ItemSeparatorComponent={() => <View style={{ height: 25 }} />}></FlatList>
+                <View style={{ flex: 1, alignContent: 'center', width: '40%' }}>
+                    <FlatList data={times} keyExtractor={(item, index) => index} renderItem={({ item }) => (<Text style={styles.time}>{item}</Text>)} ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
+                </View>
+                <View style={{ flex: 1, alignContent: 'center', width: '60%' }}>
+                    <FlatList data={stats} keyExtractor={(item, index) => index} renderItem={renderStat} ItemSeparatorComponent={() => <View style={{ height: 5 }} />}></FlatList>
+                </View>
             </View>
         </View>
-    );
+    )
 }
 
 function renderInsight({ item }) {
@@ -69,20 +59,16 @@ function Insights({ insights }) {
         </View>
     )
 }
-const data = [
-    { name: "Tasks completed", stat: "6", trend: "down" },
-    { name: "Work sessions started", stat: "12", trend: "up" },
-    { name: "Work session goals completed", stat: "8", trend: "down" },
-    { name: "Average work session length", stat: "1.5h", trend: "up" }];
 
-function Accomplishments({ navigation }) {
+function SummaryOverview({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"summary"} />
-            <DisplayWeek week={"nov 28, 2022"} width={windowWidth} navigation={navigation} prev={"PrevOverview"} next={null} />
+            <DisplayWeek week={"nov 21, 2022"} width={windowWidth} navigation={navigation} prev={"FirstOverview"} next={"Overview"} />
             <Menu navigation={navigation} />
-            <AccomplishmentList data={data} title={"accomplishments"} />
-            <Insights insights={["Superstar - you accomplished 3 tasks well ahead of their deadline!"]} />
+            <Box title={"most productive day"} times={["thursday"]} stats={["4 work sessions", "2 tasks: Psych, Reading"]} />
+            <Box title={"most focused periods"} times={["2-4pm", "8-10pm"]} stats={["Able to achieve 85% of goals scheduled during these times"]} />
+            <Insights insights={["Finishing up the week strong - early afternoon sessions are most productive!"]} />
         </SafeAreaView>
     );
 }
@@ -130,7 +116,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignContent: 'space-between',
         justifyContent: 'center',
-        paddingTop: 15,
+        paddingTop: 25,
     },
     insightBox: {
         flexDirection: 'column',
@@ -157,22 +143,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: Themes.colors.purple,
     },
-    accomplishItem: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    nameText: {
-        fontFamily: 'Poppins',
-        fontSize: 18,
-        color: Themes.colors.darkgray,
-    },
-    statText: {
-        fontFamily: 'Poppins',
-        fontSize: 30,
-        color: Themes.colors.purple,
-    }
 });
 
-export default Accomplishments;
+export default SummaryOverview;
+

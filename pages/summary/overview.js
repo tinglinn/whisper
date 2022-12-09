@@ -64,7 +64,7 @@ function SummaryOverview({navigation}) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"summary"} />
-            <DisplayWeek week={"nov 1, 2022"} width={windowWidth} />
+            <DisplayWeek week={"nov 28, 2022"} width={windowWidth} navigation={navigation} prev={"PrevOverview"} next={null} />
             <Menu navigation={navigation}/>
             <Box title={"most productive day"} times={["monday"]} stats={["3 work sessions", "1 task: CS106A"]} />
             <Box title={"most focused periods"} times={["1-3pm", "7-10pm"]} stats={["Able to achieve 80% of goals scheduled during these times"]} />
