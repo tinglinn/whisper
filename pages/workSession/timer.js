@@ -22,12 +22,13 @@ function Timer({ route, navigation }) {
     } = useStopwatch({ autoStart: true });
     
     const { task, goal } = route.params;
-    let newGoal = goal
+    let newGoal = goal;
     if (newGoal == null) {
         newGoal = "No goal has been set";
     } else {
-        newGoal = "Goal: " + {goal}
+        newGoal = "Goal: " + goal;
     }
+    console.log(newGoal);
     let statusIcon = isRunning ? "pause-circle" : "play-circle";
     
     return (
