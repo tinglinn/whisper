@@ -13,6 +13,8 @@ import TasksScreen from './pages/addTask';
 import SummaryScreen from './pages/summary';
 import HomeScreen from './pages/home';
 import AddTasksScreen from './pages/createtask/ScreenTaskType';
+import CalendarScreen from './pages/calender';
+
 const Tab = createBottomTabNavigator();
 
 
@@ -25,14 +27,6 @@ const Tab = createBottomTabNavigator();
 //   );
 // }
 
-function CalendarScreen() {
-  return (
-    <SafeAreaView style={styles.screen}>
-      <Header text={"events"} />
-      <Text>events!</Text>
-    </SafeAreaView>
-  );
-}
 
 function BottomTabs() {
   return (
