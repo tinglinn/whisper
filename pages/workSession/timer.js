@@ -9,7 +9,6 @@ import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 
 function Timer({ route, navigation }) {
-    console.log("in timer", route.params);
     const {
         seconds,
         minutes,
@@ -28,7 +27,6 @@ function Timer({ route, navigation }) {
     } else {
         newGoal = "Goal: " + goal;
     }
-    console.log(newGoal);
     let statusIcon = isRunning ? "pause-circle" : "play-circle";
     
     return (
