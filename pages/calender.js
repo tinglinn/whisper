@@ -2,9 +2,9 @@ import { Text, View, StyleSheet, Pressable, Dimensions } from 'react-native';
 import React, { ReactNode, SyntheticEvent } from "react";
 import Header from '../components/header';
 import Themes from '../assets/Themes/index';
-import ApiCalendar from 'react-google-calendar-api';
-import RNCalendarEvents from "react-native-calendar-events";
-import * as Calendar from 'expo-calendar';
+// import ApiCalendar from 'react-google-calendar-api';
+// import RNCalendarEvents from "react-native-calendar-events";
+// import * as Calendar from 'expo-calendar';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -15,7 +15,7 @@ const config = {
     "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
 }
 
-const apiCalendar = new ApiCalendar(config)
+//const apiCalendar = new ApiCalendar(config)
 
 function Button({text}) {
     return (

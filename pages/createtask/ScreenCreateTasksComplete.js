@@ -34,6 +34,7 @@ export default function ScreenCreateTasksComplete({ navigation, route} ) { // no
         "Minutes": params.hours * 60 + params.minutes,
         "Priority": params.priority,
         "IsDue": params.isdue,
+        "IsActive": 'true', // check this
     })
     .eq("Title", params.title)
     console.log("task updated!")

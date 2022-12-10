@@ -23,7 +23,8 @@ const windowWidth = Dimensions.get('window').width;
 const renderTask = ( item, navigation ) => (
     <TaskCard task={{ name: item.Title,
         session: { length: item.Minutes, total: item.NumSessions, completed: item.NumSessionsCompleted },
-        timeDue: { date: item.Date, isDue: item.IsDue }
+        timeDue: { date: item.Date, isDue: item.IsDue },
+        isActive: item.IsActive
     }} navigation={navigation} />
   );
 
@@ -45,54 +46,109 @@ function AddTaskButton({ navigation }) {
 function TaskCard({ task, navigation }) {
     const [active, setActive] = React.useState(false);
     let text = null;
-    if (active) {
+    if (!task.isActive) {
         text = "resume";
     } else {
         text = "start";
     }
-    let dueDate = task.isDue ? task.timeDue.date : "no due date";
+    let dueDate = task.timeDue.isDue ? task.timeDue.date : "no due date";
     
-    return (
-        <DropShadow style={{
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 1,
-                height: 1,
-            },
-            shadowOpacity: 0.2,
-            shadowRadius: 2,
-        }}>
-            <View style={styles.box}>
-                <LinearGradient colors={[Themes.colors.lightpurple, Themes.colors.white]}>
-                    <View style={styles.infoBox}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={styles.title}>{task.name}</Text>
-                            <Pressable><Text style={styles.mark}>mark as done</Text></Pressable>
-                        </View>
-                        <View style={{ marginTop: 25 }}>
-                            <View style={styles.infoLine}>
-                                <Feather name="clock" color={Themes.colors.purple} size={24} />
-                                <View style={{ marginLeft: 5 }}><Text style={styles.info}>{Math.floor(task.session.length / 60)}h {(task.session.length % 60)}m ({task.session.completed} of {task.session.total} sessions) </Text></View>
+    if (task.isActive) {
+        return (
+            <DropShadow style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 1,
+                    height: 1,
+                },
+                shadowOpacity: 0.2,
+                shadowRadius: 2,
+            }}>
+                <View style={styles.box}>
+                    <LinearGradient colors={[Themes.colors.lightpurple, Themes.colors.white]}>
+                        <View style={styles.infoBox}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={styles.title}>{task.name}</Text>
+                                <Pressable><Text style={styles.mark}>mark as done</Text></Pressable>
                             </View>
-                            <View style={styles.infoLine}>
-                                <Feather name="calendar" color={Themes.colors.purple} size={24} />
-                                <View style={{ marginLeft: 5 }}><Text style={styles.info}> {dueDate}</Text></View>
+                            <View style={{ marginTop: 25 }}>
+                                <View style={styles.infoLine}>
+                                    <Feather name="clock" color={Themes.colors.purple} size={24} />
+                                    <View style={{ marginLeft: 5 }}><Text style={styles.info}>{Math.floor(task.session.length / 60)}h {(task.session.length % 60)}m ({task.session.completed} of {task.session.total} sessions) </Text></View>
+                                </View>
+                                <View style={styles.infoLine}>
+                                    <Feather name="calendar" color={Themes.colors.purple} size={24} />
+                                    <View style={{ marginLeft: 5 }}><Text style={styles.info}> {dueDate}</Text></View>
+                                </View>
                             </View>
                         </View>
-                    </View>
 
-                    <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
-                            <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
-                                <Feather name="play-circle" color='white' size={28} />
-                                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
+                        <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
+                                <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
+                                    <Feather name="play-circle" color='white' size={28} />
+                                    <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
+                                </View>
+                            </Pressable>
+                        </View>
+                    </LinearGradient>
+                </View>
+            </DropShadow>
+        );
+    } else {
+        return (
+            <DropShadow style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 1,
+                    height: 1,
+                },
+                shadowOpacity: 0.2,
+                shadowRadius: 2,
+            }}>
+                <View style={styles.box}>
+                    <LinearGradient colors={[Themes.colors.background, Themes.colors.darkgray]}>
+                        <View style={{
+                            height: 170,
+                            flexDirection: 'column',
+                            backgroundColor: Themes.colors.background,
+                            width: '100%',
+                            paddingTop: 20,
+                            paddingLeft: 30,
+                            paddingRight: 30,
+                            paddingBottom: 20,
+                            marginBotton: 20,
+                        }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={styles.title}>{task.name}</Text>
+                                {/* <Pressable><Text style={styles.mark}>mark as done</Text></Pressable> */}
                             </View>
-                        </Pressable>
-                    </View>
-                </LinearGradient>
-            </View>
-        </DropShadow>
-    );
+                            <View style={{ marginTop: 25 }}>
+                                <View style={styles.infoLine}>
+                                    <Feather name="clock" color={Themes.colors.darkgray} size={24} />
+                                    <View style={{ marginLeft: 5 }}><Text style={styles.info}>{Math.floor(task.session.length / 60)}h {(task.session.length % 60)}m ({task.session.completed} of {task.session.total} sessions) </Text></View>
+                                </View>
+                                <View style={styles.infoLine}>
+                                    <Feather name="calendar" color={Themes.colors.darkgray} size={24} />
+                                    <View style={{ marginLeft: 5 }}><Text style={styles.info}> {dueDate}</Text></View>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
+                                <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.darkgray, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
+                                    <Feather name="play-circle" color='white' size={28} />
+                                    <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
+                                </View>
+                            </Pressable>
+                        </View>
+                    </LinearGradient>
+                </View>
+            </DropShadow>
+        );
+    }
+
 }
     
 export default function TasksOverview({ navigation, route }) {
