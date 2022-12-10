@@ -127,11 +127,14 @@ function Tasks({ navigation }) {
             
                 <AddTask navigation={navigation} />
               </View>*/}
-            <FlatList style={styles.taskList}
-                data={titles}
-                renderItem={({ item }) => RenderTask(item, navigation)}
-                keyExtractor={(item, index) => index}
-            />
+            <ScrollView style={styles.taskList}>
+                <FlatList style={{width: '100%'}}
+                    data={titles}
+                    renderItem={({ item }) => RenderTask(item, navigation)}
+                    keyExtractor={(item, index) => index}
+                    ListFooterComponent={AddTask}
+                />
+            </ScrollView>
         </View>
     )
 }
