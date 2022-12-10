@@ -10,7 +10,7 @@ const windowWidth = Dimensions.get('window').width;
 const data = [{name: "Leg Day", due: "2 hrs", time: "Today 9pm", location: "Farillaga" },
     {name: "Beach Trip", due: "14 hrs", time: "Tomorrow 9am", location: "Meet at the Oval" },
     { name: "Ting's Bday", due: "2 days", time: "Sunday 3pm", location: "Ng House" },
-    { name: "Club Meeting", due: "3 days", time: "Monday 4pm", location: "Ng House" }
+    { name: "Club Meeting", due: "3 days", time: "Monday 4pm", location: "Main Quad" }
 ]
 
 function RenderEvent({ item }) {
@@ -19,7 +19,6 @@ function RenderEvent({ item }) {
     )
 }
 function EventCard({ name, due, time, location }) {
-    console.log(name)
     return (
         <View style={styles.box}>
             <View style={styles.infoBox}>
