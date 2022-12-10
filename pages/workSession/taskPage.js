@@ -11,7 +11,6 @@ import 'react-native-url-polyfill/auto'
 import { LogBox } from 'react-native';
 import DropShadow from "react-native-drop-shadow";
 
-
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
   ]);
