@@ -11,9 +11,9 @@ const windowWidth = Dimensions.get('window').width;
 function Menu({ navigation }) {
     return (
         <View style={styles.menu}>
-            <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Overview</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Accomplishments")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Accomplishments</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Time")}><Text style={styles.menuText}>Time</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("FirstOverview")}><Text style={styles.menuText}>Overview</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("FirstAccomplishments")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Accomplishments</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("FirstTime")}><Text style={styles.menuText}>Time</Text></Pressable>
         </View>
     );
 }
@@ -30,18 +30,18 @@ function renderAccomplishment({ item }) {
     }
     return (
         <View style={styles.accomplishItem}>
-            <View style={{width: '65%'}}><Text style={styles.nameText}>{name}</Text></View>
+            <View style={{ width: '65%' }}><Text style={styles.nameText}>{name}</Text></View>
             <View style={{ width: '20%', alignItems: 'flex-end' }}><Text style={styles.statText}>{stat}</Text></View>
             {icon}
         </View>
     )
 }
 
-function AccomplishmentList({data, title}) {
+function AccomplishmentList({ data, title }) {
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
-            <View style={{width: '25%', marginLeft: 250}}>
+            <View style={{ width: '25%', marginLeft: 250 }}>
                 <Text style={{ flexShrink: 1, fontFamily: 'Poppins', fontSize: 13, color: Themes.colors.darkgray, textAlign: 'right' }}>Compared to last week</Text>
             </View>
             <View style={styles.boxBody}>
@@ -70,19 +70,19 @@ function Insights({ insights }) {
     )
 }
 const data = [
-    { name: "Tasks completed", stat: "6", trend: "down" },
-    { name: "Work sessions started", stat: "12", trend: "up" },
-    { name: "Work session goals completed", stat: "8", trend: "down" },
-    { name: "Average work session length", stat: "1.5h", trend: "up" }];
+    { name: "Tasks completed", stat: "7", trend: "down" },
+    { name: "Work sessions started", stat: "10", trend: "up" },
+    { name: "Work session goals completed", stat: "8", trend: "up" },
+    { name: "Average work session length", stat: "1.8h", trend: "up" }];
 
 function Accomplishments({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"summary"} />
-            <DisplayWeek week={"nov 28, 2022"} width={windowWidth} navigation={navigation} prev={"PrevOverview"} next={null} />
+            <DisplayWeek week={"nov 14, 2022"} width={windowWidth} navigation={navigation} prev={null} next={"PrevOverview"} />
             <Menu navigation={navigation} />
             <AccomplishmentList data={data} title={"accomplishments"} />
-            <Insights insights={["Superstar - you accomplished 3 tasks well ahead of their deadline!"]} />
+            <Insights insights={["Three work session per day seems to work well for you!"]} />
         </SafeAreaView>
     );
 }

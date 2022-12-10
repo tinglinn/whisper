@@ -1,21 +1,32 @@
 import { Text, View, StyleSheet, Pressable, Dimensions } from 'react-native';
-import React, { useState } from "react";
+import React, { ReactNode, SyntheticEvent } from "react";
 import Header from '../components/header';
 import Themes from '../assets/Themes/index';
+import ApiCalendar from 'react-google-calendar-api';
+import RNCalendarEvents from "react-native-calendar-events";
+import * as Calendar from 'expo-calendar';
 
 const windowWidth = Dimensions.get('window').width;
 
+const config = {
+    "clientId": "863454737592-5dlkmdvar9p7q8qqrnt5ctk0upu0i64d.apps.googleusercontent.com",
+    "apiKey": "AIzaSyDeDbYeC8L0G3bI8Jf2R8B4Mk1mDG0eRj8",
+    "scope": "https://www.googleapis.com/auth/calendar",
+    "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+}
+
+const apiCalendar = new ApiCalendar(config)
+
 function Button({text}) {
     return (
-        <Pressable>
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>{text}</Text>
-            </View>
-        </Pressable>
+        <View style={styles.button}>
+            <Text style={styles.buttonText}>{text}</Text>
+        </View>
     )
 }
 
-function Calendar() {
+
+function CalendarScreen() {
     return (
         <View style={styles.screen}>
             <Header text={"events"} />
@@ -23,8 +34,10 @@ function Calendar() {
                 <View style={styles.card}>
                     <Text style={styles.importText}>Import events from an external calendar:</Text>
                     <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly', paddingTop: 20, paddingBottom: 20}}>
-                        <Button text={"Apple Calendar"} />
-                        <Button text={"Google Calendar"} />
+                        <Pressable><Button text={"Apple Calendar"} /></Pressable>
+                        <Pressable>
+                            <Button text={"Google Calendar"} />
+                        </Pressable>
                         <Button text={"Outlook Calendar"} />
                     </View>
                 </View>
@@ -33,7 +46,7 @@ function Calendar() {
     )
 }
 
-export default Calendar;
+export default CalendarScreen;
 const styles = StyleSheet.create({
     screen: {
         flexDirection: 'column',

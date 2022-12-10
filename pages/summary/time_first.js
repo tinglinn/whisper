@@ -11,9 +11,9 @@ const windowWidth = Dimensions.get('window').width;
 function Menu({ navigation }) {
     return (
         <View style={styles.menu}>
-            <Pressable onPress={() => navigation.navigate("Overview")}><Text style={styles.menuText}>Overview</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Accomplishments")}><Text style={styles.menuText}>Accomplishments</Text></Pressable>
-            <Pressable onPress={() => navigation.navigate("Time")}><Text style={{fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple}}>Time</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("FirstOverview")}><Text style={styles.menuText}>Overview</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("FirstAccomplishments")}><Text style={styles.menuText}>Accomplishments</Text></Pressable>
+            <Pressable onPress={() => navigation.navigate("FirstTime")}><Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16, color: Themes.colors.purple }}>Time</Text></Pressable>
         </View>
     );
 }
@@ -26,9 +26,9 @@ function renderTime({ item }, maxTime) {
 
     return (
         <View style={styles.timeItem}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
                 <Text style={styles.nameText}>{name}{': '}</Text>
-                <Text style={{fontFamily: 'Poppins-Bold', fontSize: 18, color: Themes.colors.darkgray}}>{stat}{' hours'}</Text>
+                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 18, color: Themes.colors.darkgray }}>{stat}{' hours'}</Text>
             </View>
             <View
                 style={{
@@ -42,7 +42,7 @@ function renderTime({ item }, maxTime) {
 
 function TimeBreakdown({ data, title }) {
     const maxTime = Math.max(...data.map(data => data.stat));
-    
+
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
@@ -73,36 +73,37 @@ function Insights({ insights }) {
 }
 
 const data = [
-    { name: "Time Estimated for Tasks", stat: 12, trend: "up" },
-    { name: "Time Needed for Tasks", stat: 16, trend: "up" }];
+    { name: "Time Estimated for Tasks", stat: 15 },
+    { name: "Time Needed for Tasks", stat: 18 }];
 
-function TimeEstimation({title}) {
+function TimeEstimation({ title }) {
     return (
         <View style={styles.box}>
             <Text style={styles.title}>{title}</Text>
             <View style={styles.boxBody}>
-                <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 8}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 8 }}>
                     <Ionicons name="document-text-outline" size={25} />
                     <Text style={styles.nameText}> total time estimated: </Text>
-                    <Text style={{fontFamily: 'Poppins-SemiBold', fontSize: 18, color: Themes.colors.darkgray}}>12 hrs</Text>
+                    <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 18, color: Themes.colors.darkgray }}>15 hrs</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
                     <Ionicons name="time-outline" size={25} />
                     <Text style={styles.nameText}> total time spent: </Text>
-                    <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 18, color: Themes.colors.darkgray }}>16 hrs</Text>
+                    <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 18, color: Themes.colors.darkgray }}>18 hrs</Text>
                 </View>
-                <View style={{marginBottom: 20}}>
+                <View style={{ marginBottom: 20 }}>
                     <Text style={styles.stat}>you underestimated the time needed for:</Text>
-                    <View style={{marginTop: 8, paddingLeft: 20}}>
-                        <Text style={styles.stat}>• CS106A</Text>
-                        <Text style={styles.stat}>• Taxes</Text>
+                    <View style={{ marginTop: 8, paddingLeft: 20 }}>
+                        <Text style={styles.stat}>• Scholarship Application</Text>
+                        <Text style={styles.stat}>• CS161 PSET</Text>
                     </View>
                 </View>
                 <View>
                     <Text style={styles.stat}>you overestimated the time needed for:</Text>
                     <View style={{ marginTop: 8, paddingLeft: 20 }}>
-                        <Text style={styles.stat}>• Psych PSET</Text>
-                        <Text style={styles.stat}>• Reading</Text>
+                        <Text style={styles.stat}>• Organize club meeting</Text>
+                        <Text style={styles.stat}>• Grocery trip</Text>
+                        <Text style={styles.stat}>• Interview prep</Text>
                     </View>
                 </View>
             </View>
@@ -113,10 +114,10 @@ function Time({ navigation }) {
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={"summary"} />
-            <DisplayWeek week={"nov 28, 2022"} width={windowWidth} navigation={navigation} prev={"PrevOverview"} next={null} />
+            <DisplayWeek week={"nov 14, 2022"} width={windowWidth} navigation={navigation} prev={null} next={"PrevOverview"} />
             <Menu navigation={navigation} />
             <TimeEstimation title={"time estimation"} />
-            <Insights insights={["On average, you underestimate the amount of time it will take for your CS106A task by 3 hours"]} />
+            <Insights insights={["On average, you underestimate the amount of time it will take for your application by 2 hours"]} />
         </SafeAreaView>
     );
 }

@@ -6,6 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SummaryOverview from './summary/overview';
 import Accomplishments from './summary/accomplishments';
 import Time from './summary/time';
+import LastOverview from './summary/ov_last';
+import LastAccomplishments from './summary/ac_last';
+import LastTime from './summary/time_last';
+import FirstOverview from './summary/ov_first';
+import FirstAccomplishments from './summary/ac_first';
+import FirstTime from './summary/time_first';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +22,12 @@ function SummaryScreen() {
                 <Stack.Screen name="Overview" component={SummaryOverview} />
                 <Stack.Screen name="Accomplishments" component={Accomplishments} />
                 <Stack.Screen name="Time" component={Time} />
+                <Stack.Screen name="PrevOverview" component={LastOverview} />
+                <Stack.Screen name="PrevAccomplishments" component={LastAccomplishments} />
+                <Stack.Screen name="PrevTime" component={LastTime} />
+                <Stack.Screen name="FirstOverview" component={FirstOverview} />
+                <Stack.Screen name="FirstAccomplishments" component={FirstAccomplishments} />
+                <Stack.Screen name="FirstTime" component={FirstTime} />
             </Stack.Navigator>
         </NavigationContainer>
     );
