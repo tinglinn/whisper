@@ -131,7 +131,7 @@ function Tasks({ navigation }) {
                     data={titles}
                     renderItem={({ item }) => RenderTask(item, navigation)}
                     keyExtractor={(item, index) => index}
-                    ListFooterComponent={AddTask}
+                    ListFooterComponent={<AddTask navigation={navigation} />}
                 />
             </ScrollView>
         </View>
