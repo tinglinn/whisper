@@ -7,7 +7,7 @@ import BackButton from '../createtask/backButton';
 function SetGoal({ route, navigation }) {
     const [text, onChangeText] = React.useState(null);
     const { name } = route.params;
-    console.log("in set goal", route.params);
+   //console.log("in set goal", route.params);
     return (
         <View style={styles.screen}>
             <Header text={name} />

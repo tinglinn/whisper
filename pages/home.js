@@ -98,7 +98,6 @@ function Tasks({ navigation }) {
 
     useEffect(() => {
         fetchTasks()
-        console.log(titles);
     }, [titles])
 
     async function fetchTasks() {

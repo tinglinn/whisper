@@ -75,7 +75,6 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
           value={selectedTask}
           onChange={item => {
             setSelected(item.Title);
-            console.log(selectedTask);
           }}
           renderLeftIcon={() => (
             <View style={{flexDirection: 'row', alignItems: 'center'}}>

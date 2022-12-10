@@ -14,7 +14,7 @@
     
     useEffect(() => {
       fetchTasks()
-      console.log(titles);
+      //console.log(titles);
     }, [])
     async function fetchTasks() {
       const {data, error} = await supabase
@@ -56,7 +56,7 @@
         value={selectedTask}
         onChange={item => {
           setSelected(item.Title);
-          console.log(selectedTask);
+          //console.log(selectedTask);
         }}
         renderLeftIcon={() => (
           <View style={{flexDirection: 'row', alignItems: 'center'}}>

@@ -1,14 +1,22 @@
 import { Text, View, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { useTimer, useStopwatch } from 'react-timer-hook';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import BackButton from '../createtask/backButton';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { supabase } from '../../env/supabase';
+import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 const windowWidth = Dimensions.get('window').width;
 
 function Timer({ route, navigation }) {
+
     const {
         seconds,
         minutes,
@@ -21,6 +29,20 @@ function Timer({ route, navigation }) {
     } = useStopwatch({ autoStart: true });
     
     const { task, goal } = route.params;
+
+    useEffect(() => {
+        updateTask()
+      }, [])
+    
+    async function updateTask() {
+        const {data, error} = await supabase
+        .from("Tasks")
+        .update({
+            "IsActive": 'true', // check this
+        })
+        .eq("Title", task)
+    }
+
     let newGoal = goal;
     if (newGoal == null) {
         newGoal = "No goal has been set";

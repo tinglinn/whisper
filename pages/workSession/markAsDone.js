@@ -15,38 +15,21 @@ export default function ScreenCreateTasksComplete({ navigation, route} ) { // no
   const params = route.params;
   const [titles, setTitles] = useState([]) // store data supabase
   useEffect(() => {
-    //console.log("minutes spent:", params.MinutesSpent);
     getTask()
-    
   }, [])
 
   async function getTask() {
-    this.forceUpdate();
     const {data, error} = await supabase
       .from("Tasks")
-      //.select("*")
-      .update({ "CurrentSessionMinutes": params.MinutesSpent})
-      .eq("Title", params.title)
-    setTitles(data)
-    // setTitles(titles[0]);
-    // console.log("the title is: ", params.title);
-
-    // console.log("data for the current title: ", titles);
-    // console.log("num sessions completed: ", titles[0].NumSessionsCompleted - Math.floor(params.MinutesSpent / (titles[0].Minutes / titles[0].NumSessions)));
-    // console.log("num minutes of session completed: ", titles[0].CurrentSessionMinutes + params.MinutesSpent % (titles[0].Minutes / titles[0].NumSessions))
-
-    // const {data2, error2} = await supabase
-    // .from("Tasks")
-    // .update({ "NumSessionsCompleted": titles[0].NumSessionsCompleted + Math.floor(params.MinutesSpent / (titles[0].Minutes / titles[0].NumSessions))})
-    // .update({ "CurrentSessionMinutes": titles[0].CurrentSessionMinutes + params.MinutesSpent % (titles[0].Minutes / titles[0].NumSessions)})
-    // .eq("Title", params.title)
+      .update({"IsActive": 'false'})
+      .eq("Title", params.name)
   }
   
   return (
     <View style={styles.screen}>
       <LinearGradient style={styles.background} colors={[Themes.colors.red, Themes.colors.mediumpurple, Themes.colors.red, Themes.colors.mediumpurple]}>
         <MaterialCommunityIcons name="checkbox-marked-circle" color={Themes.colors.white} size={50} style={{marginBottom:10}} />
-        <Text style={[styles.title, {marginBottom: 15}]}>Great work! </Text>
+        <Text style={[styles.title, {marginBottom: 15}]}>Marked as done! </Text>
         <Pressable onPress={() => navigation.navigate('TasksOverview')}>
           <View style={styles.button} >
           <Text style={styles.buttontext}>Your Tasks</Text></View>

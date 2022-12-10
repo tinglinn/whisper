@@ -38,7 +38,6 @@ export default function ScreenCreateTasksComplete({ navigation, route} ) { // no
     })
     .eq("Title", params.title)
     console.log("task updated!")
-    console.log("due date: ", params.duedate)
   }
   
   return (

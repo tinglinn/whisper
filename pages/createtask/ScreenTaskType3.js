@@ -29,8 +29,6 @@ export default function ScreenTaskType3({ navigation, route }) { // note navigat
   
   useEffect(() => {
     fetchTasks()
-    //console.log("data: ", params.data);
-    //console.log("titles: ", params.task)
   }, [])
   async function fetchTasks() {
     const {data, error} = await supabase
@@ -38,15 +36,12 @@ export default function ScreenTaskType3({ navigation, route }) { // note navigat
       .select("*")
       .eq("Title", params.task)
     setTitles(data)
-    console.log("titles: ", titles[0])
 
     setDate(titles[0].Date);
     setValue(titles[0].Priority);
     setValueHours(Math.floor(titles[0].Minutes / 60));
     setValueMins(titles[0].Minutes % 60);
     setValueSessions(titles[0].NumSessions);
-    // console.log("date: ", date, "priority: ", value, "num sesh: ", valueSessions, "minutes: ", valueMins, "hours: ", valueHours);
-    // // console.log("date: ", date);
   }
 
   return (

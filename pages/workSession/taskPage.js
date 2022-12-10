@@ -52,6 +52,7 @@ function TaskCard({ task, navigation }) {
         text = "start";
     }
     let dueDate = task.timeDue.isDue ? task.timeDue.date : "no due date";
+
     
     if (task.isActive) {
         return (
@@ -69,7 +70,9 @@ function TaskCard({ task, navigation }) {
                         <View style={styles.infoBox}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={styles.title}>{task.name}</Text>
-                                <Pressable><Text style={styles.mark}>mark as done</Text></Pressable>
+                                <Pressable onPress={() => navigation.navigate('MarkAsDone', { name: task.name })}>
+                                    <Text style={styles.mark}>mark as done</Text>
+                                </Pressable>
                             </View>
                             <View style={{ marginTop: 25 }}>
                                 <View style={styles.infoLine}>
@@ -148,7 +151,6 @@ function TaskCard({ task, navigation }) {
             </DropShadow>
         );
     }
-
 }
     
 export default function TasksOverview({ navigation, route }) {
