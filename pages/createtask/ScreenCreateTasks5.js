@@ -17,7 +17,7 @@ import NextButton from "./nextButton";
 export default function ScreenCreateTasks5({ navigation, route} ) { // note navigation pprop
   const params = route.params;
   // for datepicker only'
-  const [valueHours, setValueHours] = React.useState(0);
+  const [valueHours, setValueHours] = React.useState(1);
   const nextScreenName = "ScreenCreateTasksComplete";
   let active = false;
   if (valueHours != 0) {
@@ -43,7 +43,7 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
           style={{width: (Dimensions.get('window').width - 120), height: 40}}
           value={valueHours}
           onValueChange={value => setValueHours(value)}
-          minimumValue={0}
+          minimumValue={1}
           maximumValue={10}
           step={1}
           minimumTrackTintColor={Themes.colors.purple}
@@ -57,9 +57,10 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
         numSessions: valueHours,
         priority: params.priority,
         title: params.title,
-        duedate: params.date,
+        duedate: params.duedate,
         hours: params.hours,
         minutes: params.minutes,
+        isdue: params.isdue,
       })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Finish</Text></View>

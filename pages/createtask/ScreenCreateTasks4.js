@@ -55,9 +55,10 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks5', {
         priority: value,
         title: params.title,
-        duedate: params.date,
+        duedate: params.duedate,
         hours: params.hours,
         minutes: params.minutes,
+        isdue: params.isdue,
       })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>

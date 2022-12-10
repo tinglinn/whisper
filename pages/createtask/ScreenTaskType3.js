@@ -45,8 +45,8 @@ export default function ScreenTaskType3({ navigation, route }) { // note navigat
     setValueHours(Math.floor(titles[0].Minutes / 60));
     setValueMins(titles[0].Minutes % 60);
     setValueSessions(titles[0].NumSessions);
-    console.log("date: ", date, "priority: ", value, "num sesh: ", valueSessions, "minutes: ", valueMins, "hours: ", valueHours);
-    // console.log("date: ", date);
+    // console.log("date: ", date, "priority: ", value, "num sesh: ", valueSessions, "minutes: ", valueMins, "hours: ", valueHours);
+    // // console.log("date: ", date);
   }
 
   return (

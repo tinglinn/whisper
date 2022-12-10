@@ -9,7 +9,6 @@ import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 
 function Timer({ route, navigation }) {
-    console.log("in timer", route.params);
     const {
         seconds,
         minutes,
@@ -22,11 +21,11 @@ function Timer({ route, navigation }) {
     } = useStopwatch({ autoStart: true });
     
     const { task, goal } = route.params;
-    let newGoal = goal
+    let newGoal = goal;
     if (newGoal == null) {
         newGoal = "No goal has been set";
     } else {
-        newGoal = "Goal: " + {goal}
+        newGoal = "Goal: " + goal;
     }
     let statusIcon = isRunning ? "pause-circle" : "play-circle";
     
@@ -45,11 +44,9 @@ function Timer({ route, navigation }) {
                             <Text style={styles.buttonText}>{isRunning ? "Pause" : "Resume"}</Text>
                         </View>
                     </Pressable>
-                    <Pressable onPress={() => navigation.navigate("TasksOverview", {
-                        hours: hours,
-                        minutes: minutes,
-                        title: params.title
-                    
+                    <Pressable onPress={() => navigation.navigate("EndTask", {
+                        MinutesSpent: 60 * hours + minutes,
+                        title: task
                         })}>
                         <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                             <MaterialCommunityIcons name="check-circle" color={Themes.colors.purple} size={60} />

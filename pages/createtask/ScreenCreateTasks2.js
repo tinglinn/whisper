@@ -15,9 +15,7 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
 
   // for datepicker only'
   const [date, setDate] = useState(new Date());
-  const [value, setValue] = React.useState('first');
-
-  
+  const [value, setValue] = React.useState('false');
 
   return (
     <View style={styles.screen}>
@@ -36,12 +34,12 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
         {/* <Text style={{marginTop: 20,}}> Task Name </Text> */}
         <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, marginRight: 25}}>
-              <RadioButton value="first" />
+              <RadioButton value="true" />
               <Text style={styles.option}>Yes, it is due...   </Text>
               <DatePicker date={date} onDateChange={setDate} />
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10, marginRight: 25}}>
-            <RadioButton value="second" />
+            <RadioButton value="false" />
             <Text style={styles.option}>No, I don't need to finish it by a set time.</Text>
           </View>
         </RadioButton.Group>
@@ -49,7 +47,8 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
 
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {
         title: params.title,
-        duedate: date
+        duedate: date,
+        isdue: value,
       })}>
       <View style={styles.button} >
       <Text style={styles.buttontext}>Next</Text></View>
