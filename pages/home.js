@@ -1,10 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons, SimpleLineIcons } from '@expo/vector-icons';
 import Themes from '../assets/Themes/index';
 import DropShadow from "react-native-drop-shadow";
+import { supabase } from '../env/supabase';
+import 'react-native-url-polyfill/auto'
+import { LogBox } from 'react-native';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
+
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+]);
+
 
 function Reminder({reminderText}) {
     return (
@@ -52,12 +61,53 @@ function TaskCard({ task, navigation }) {
     )
 }
 
-function DisplayMessage() {
+function RenderTask(item, navigation) {
+    
     return (
-        <Text>check</Text>
+        <TaskCard task={item.Title} navigation={navigation} />
     )
 }
+
+function AddTask({ navigation }) {
+    return (
+        <Pressable onPress={() => navigation.navigate('AddTasks')}>
+            <DropShadow style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.35,
+                shadowRadius: 3,
+            }}><View style={{
+                flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
+                backgroundColor: Themes.colors.background, borderRadius: 8,
+            }}>
+                    <Text
+                        style={{ fontFamily: 'Poppins', fontSize: 24, color: Themes.colors.darkgray, textAlign: 'left', }}>
+                        + add task
+                    </Text>
+                </View>
+            </DropShadow>
+        </Pressable>
+    )
+}
+
 function Tasks({ navigation }) {
+    const [titles, setTitles] = useState([]) // store data
+
+    useEffect(() => {
+        fetchTasks()
+        console.log(titles);
+    }, [titles])
+
+    async function fetchTasks() {
+        const { data, error } = await supabase
+            .from("Tasks")
+            .select("*")
+        setTitles(data)
+    } // populate titles with data
+
     const [display, setDisplay] = useState(false)
     let message = display ? <View style={styles.message}><Text style={styles.messageText}>Click on a task to begin a new session!</Text></View> : null;
     return (
@@ -70,30 +120,18 @@ function Tasks({ navigation }) {
                 </View>
                 <Pressable onPress={() => navigation.navigate("TasksOverview")}><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} /></Pressable>
             </View>
-            <View style={styles.taskList}>
+            
+            {/*<View style={styles.taskList}>
                 <TaskCard task={'CS106A'} navigation={navigation} />
                 <TaskCard task={'Psych'} navigation={navigation} />
-                <Pressable onPress={() => navigation.navigate('AddTasks')}>
-                    <DropShadow style={{
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                        },
-                        shadowOpacity: 0.35,
-                        shadowRadius: 3,
-                    }}><View style={{
-                        flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
-                        backgroundColor: Themes.colors.background, borderRadius: 8,
-                        }}>
-                            <Text
-                                style={{fontFamily: 'Poppins', fontSize: 24, color: Themes.colors.darkgray, textAlign: 'left',}}>
-                                + add task
-                            </Text>
-                        </View>
-                    </DropShadow>
-                </Pressable>
-            </View>
+            
+                <AddTask navigation={navigation} />
+              </View>*/}
+            <FlatList style={styles.taskList}
+                data={titles}
+                renderItem={({ item }) => RenderTask(item, navigation)}
+                keyExtractor={(item, index) => index}
+            />
         </View>
     )
 }
