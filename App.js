@@ -16,6 +16,7 @@ import AddTasksScreen from './pages/createtask/ScreenTaskType';
 import CalendarScreen from './pages/calender';
 import SetGoal from './pages/workSession/setGoal';
 import Timer from './pages/workSession/timer';
+import EndTask from './pages/workSession/endTask';
 const Tab = createBottomTabNavigator();
 
 
@@ -38,7 +39,8 @@ function BottomTabs() {
         tabBarButton: [
           "AddTasks",
           "SetGoal",
-          "Timer"
+          "Timer",
+          "EndTask"
         ].includes(route.name)
           ? () => {
             return null;
@@ -77,6 +79,7 @@ function BottomTabs() {
       <Tab.Screen name="AddTasks" component={AddTasksScreen} />
       <Tab.Screen name="SetGoal" component={SetGoal} />
       <Tab.Screen name="Timer" component={Timer} />
+      <Tab.Screen name="EndTask" component={EndTask} />
   </Tab.Navigator>
   );
 }

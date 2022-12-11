@@ -22,6 +22,7 @@ import SetGoal from './workSession/setGoal';
 import Timer from './workSession/timer';
 import EndTask from './workSession/endTask';
 import markAsDone from './workSession/markAsDone';
+import HomeScreen from './home';
 // CREATE A STACK **
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ export default function App() {
         // SET UP THE NAVIGATION ** 
         <NavigationContainer independent={true} options={{ headerShown: false, }}>
             <Stack.Navigator >
+            <Stack.Screen name="HomeScreen" options={{ headerShown: false }} component={HomeScreen} />
                 <Stack.Screen name="TasksOverview" options={{ headerShown: false }} component={TasksOverview} />
                 <Stack.Screen name="ScreenTaskType" options={{ headerShown: false }} component={ScreenTaskType} />
                 <Stack.Screen name="ScreenTaskType2" options={{ headerShown: false }} component={ScreenTaskType2} />

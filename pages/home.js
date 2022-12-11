@@ -70,7 +70,7 @@ function RenderTask(item, navigation) {
 
 function AddTask({ navigation }) {
     return (
-        <Pressable onPress={() => navigation.navigate('AddTasks')}>
+        <Pressable onPress={() => navigation.navigate('ScreenCreateTasks', )}>
             <DropShadow style={{
                 shadowColor: "#000",
                 shadowOffset: {
@@ -131,7 +131,7 @@ function Tasks({ navigation }) {
                     data={titles}
                     renderItem={({ item }) => RenderTask(item, navigation)}
                     keyExtractor={(item, index) => index}
-                    ListFooterComponent={AddTask}
+                    ListFooterComponent={AddTask({navigation})}
                 />
             </ScrollView>
         </View>
