@@ -11,13 +11,10 @@ import 'react-native-url-polyfill/auto'
 import { LogBox } from 'react-native';
 import DropShadow from "react-native-drop-shadow";
 
-
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
   ]);
 
-// CREATE A STACK **
-const Stack = createStackNavigator();
 const windowWidth = Dimensions.get('window').width;
 
 const renderTask = ( item, navigation ) => (
@@ -41,10 +38,7 @@ function AddTaskButton({ navigation }) {
     )
 }
 
-
-
 function TaskCard({ task, navigation }) {
-    const [active, setActive] = React.useState(false);
     let text = null;
     if (!task.isActive) {
         text = "resume";
@@ -52,7 +46,6 @@ function TaskCard({ task, navigation }) {
         text = "start";
     }
     let dueDate = task.timeDue.isDue ? task.timeDue.date : "no due date";
-
     
     if (task.isActive) {
         return (
@@ -71,7 +64,7 @@ function TaskCard({ task, navigation }) {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={styles.title}>{task.name}</Text>
                                 <Pressable onPress={() => navigation.navigate('MarkAsDone', { name: task.name })}>
-                                    <Text style={styles.mark}>mark as done</Text>
+                                    <MaterialCommunityIcons name="checkbox-blank-outline" size={28} color={Themes.colors.purple} />
                                 </Pressable>
                             </View>
                             <View style={{ marginTop: 25 }}>
@@ -81,13 +74,13 @@ function TaskCard({ task, navigation }) {
                                 </View>
                                 <View style={styles.infoLine}>
                                     <Feather name="calendar" color={Themes.colors.purple} size={24} />
-                                    <View style={{ marginLeft: 5 }}><Text style={styles.info}> {dueDate}</Text></View>
+                                    <View style={{ marginLeft: 5 }}><Text style={styles.info}>{dueDate}</Text></View>
                                 </View>
                             </View>
                         </View>
 
                         <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
+                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name, page: "TasksOverview" })}>
                                 <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
                                     <Feather name="play-circle" color='white' size={28} />
                                     <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
@@ -124,7 +117,7 @@ function TaskCard({ task, navigation }) {
                         }}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={styles.title}>{task.name}</Text>
-                                {/* <Pressable><Text style={styles.mark}>mark as done</Text></Pressable> */}
+                                <MaterialCommunityIcons name="checkbox-marked-outline" size={28} color={Themes.colors.darkgray}/>
                             </View>
                             <View style={{ marginTop: 25 }}>
                                 <View style={styles.infoLine}>
@@ -157,17 +150,17 @@ export default function TasksOverview({ navigation, route }) {
     const [titles, setTitles] = useState([]) // store data
 
     useEffect(() => {
-    fetchTasks()
-    //console.log(titles);
-  }, [titles])
-  async function fetchTasks() {
-    const {data, error} = await supabase
-      .from("Tasks")
-      .select("*")
-    setTitles(data)
-    // console.log(data)
-  } // populate titles with data
-      
+        fetchTasks()
+    }, [titles])
+  
+    async function fetchTasks() {
+        const {data, error} = await supabase
+        .from("Tasks")
+        .select("*")
+        const sortedData = data.sort((t1, t2) => (t1.IsActive && !t2.IsActive) ? -1 : (!t1.isActive && t2.isActive) ? 1 : 0);
+        setTitles(sortedData);
+    } // populate titles with data
+    
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={'your tasks'} />
@@ -218,7 +211,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Poppins-SemiBold',
-        fontSize: 28,
+        fontSize: 26,
         color: Themes.colors.darkgray
     },
     mark: {

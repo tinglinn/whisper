@@ -28,7 +28,7 @@ function Timer({ route, navigation }) {
         reset,
     } = useStopwatch({ autoStart: true });
     
-    const { task, goal } = route.params;
+    const { task, goal, page } = route.params;
 
     useEffect(() => {
         updateTask()
@@ -50,7 +50,7 @@ function Timer({ route, navigation }) {
         newGoal = "Goal: " + goal;
     }
     let statusIcon = isRunning ? "pause-circle" : "play-circle";
-    
+
     return (
         <View style={styles.screen}>
             <Header text={task} />
@@ -66,10 +66,11 @@ function Timer({ route, navigation }) {
                             <Text style={styles.buttonText}>{isRunning ? "Pause" : "Resume"}</Text>
                         </View>
                     </Pressable>
-                    <Pressable onPress={() => navigation.navigate("EndTask", {
+                    <Pressable onPress={reset} onPressIn={() => navigation.navigate("EndTask", {
                         MinutesSpent: 60 * hours + minutes,
-                        title: task
-                        })}>
+                        title: task,
+                        page: page,
+                    })}>
                         <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                             <MaterialCommunityIcons name="check-circle" color={Themes.colors.purple} size={60} />
                             <Text style={styles.buttonText}>Finish Session</Text>

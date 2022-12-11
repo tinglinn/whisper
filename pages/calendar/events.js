@@ -13,6 +13,17 @@ const data = [{name: "Leg Day", due: "2 hrs", time: "Today 9pm", location: "Fari
     { name: "Club Meeting", due: "3 days", time: "Monday 4pm", location: "Main Quad" }
 ]
 
+function BackButton({ navigation }) {
+    return (
+        <Pressable style={{ left: 20, top: 120, position: "absolute" }} onPress={() => navigation.goBack()}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                <MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} />
+                <Text style={{ color: Themes.colors.darkgray, fontFamily: 'Poppins' }}>Back</Text>
+            </View>
+        </Pressable>
+    );
+}
+
 function RenderEvent({ item }) {
     return (
         <EventCard name={item.name} due={item.due} time={item.time} location={item.location} />
@@ -43,6 +54,7 @@ export default function Events({navigation}) {
         <SafeAreaView style={styles.screen}>
             <Header text={'your events'} />
             <View style={styles.container}>
+                <BackButton navigation={navigation} />
                 <View style={{marginBottom: 10, width: '100%', paddingLeft: 30,flexDirection: 'row', justifyContent: 'flex-start'}}><Text style={styles.title}>Upcoming events</Text></View>
                 <FlatList style={{ width: '100%' }}
                     data={data}

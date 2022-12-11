@@ -22,7 +22,7 @@ import SetGoal from './workSession/setGoal';
 import Timer from './workSession/timer';
 import EndTask from './workSession/endTask';
 import markAsDone from './workSession/markAsDone';
-import HomeScreen from './home';
+
 // CREATE A STACK **
 const Stack = createStackNavigator();
 
@@ -30,10 +30,8 @@ export default function App() {
     return (
 
         // SET UP THE NAVIGATION ** 
-        <NavigationContainer independent={true} options={{ headerShown: false, }}>
-            <Stack.Navigator >
-            <Stack.Screen name="HomeScreen" options={{ headerShown: false }} component={HomeScreen} />
-                <Stack.Screen name="TasksOverview" options={{ headerShown: false }} component={TasksOverview} />
+        <Stack.Navigator >
+                <Stack.Screen name="TasksOverview" options={{ headerShown: false, animationEnabled: false }} component={TasksOverview} />
                 <Stack.Screen name="ScreenTaskType" options={{ headerShown: false }} component={ScreenTaskType} />
                 <Stack.Screen name="ScreenTaskType2" options={{ headerShown: false }} component={ScreenTaskType2} />
                 <Stack.Screen name="ScreenTaskType3" options={{ headerShown: false }} component={ScreenTaskType3} />
@@ -47,13 +45,12 @@ export default function App() {
 
                 <Stack.Screen name="ScreenReviewTaskInfo" options={{ headerShown: false }} component={ScreenReviewTaskInfo} />
                 
-    
                 <Stack.Screen name="SetGoal" options={{ headerShown: false }} component={SetGoal} />
                 <Stack.Screen name="Timer" options={{ headerShown: false }} component={Timer} />
                 <Stack.Screen name="EndTask" options={{ headerShown: false }} component={EndTask} />
                 <Stack.Screen name="MarkAsDone" options={{ headerShown: false }} component={markAsDone} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        </Stack.Navigator>
+        
 
 
 
