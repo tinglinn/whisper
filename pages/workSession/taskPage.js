@@ -86,7 +86,7 @@ function TaskCard({ task, navigation }) {
                         </View>
 
                         <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
+                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name, page: "TasksOverview" })}>
                                 <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.purple, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
                                     <Feather name="play-circle" color='white' size={28} />
                                     <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>

@@ -48,7 +48,7 @@ function TaskCard({ task, navigation }) {
             shadowOpacity: 0.5,
             shadowRadius: 3,
         }}>
-            <Pressable onPress={() => navigation.navigate("SetGoal", {name: task})}>
+            <Pressable onPress={() => navigation.navigate("Tasks", { screen: "SetGoal", params:{ name: task, page: "Home"}} )}>
                 <View style={{
                     width: '90%', height: 50, marginBottom: 20, paddingLeft: 18,
                     backgroundColor: Themes.colors.purple, borderRadius: 8,
@@ -62,7 +62,6 @@ function TaskCard({ task, navigation }) {
 }
 
 function RenderTask(item, navigation) {
-    
     return (
         <TaskCard task={item.Title} navigation={navigation} />
     )
@@ -138,10 +137,6 @@ function Tasks({ navigation }) {
     )
 }
 
-
-                //<Text style={styles.tasksText}>CS106A</Text>
-                //<Text style={styles.tasksText}>Psych</Text>
-                //<Text style={styles.tasksText}>Taxes</Text>
 function HomeScreen({navigation}) {
     return (
         <SafeAreaView style={styles.screen}>
