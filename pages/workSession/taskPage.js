@@ -132,7 +132,7 @@ function TaskCard({ task, navigation }) {
                         </View>
 
                         <View style={{ marginTop: 15, marginRight: 10, marginBottom: 15, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Pressable onPress={() => setCheckIcon("checkbox-blank-outline")} onPressIn={() => navigation.navigate('SetGoal', { name: task.name })}>
+                            <Pressable onPress={() => navigation.navigate('SetGoal', { name: task.name })}>
                                 <View style={{ width: 150, height: 45, backgroundColor: Themes.colors.darkgray, borderRadius: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', paddingLeft: 18, paddingRight: 18 }}>
                                     <Feather name="play-circle" color='white' size={28} />
                                     <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: 'white' }}>{text}</Text>
@@ -150,17 +150,17 @@ export default function TasksOverview({ navigation, route }) {
     const [titles, setTitles] = useState([]) // store data
 
     useEffect(() => {
-    fetchTasks()
-    //console.log(titles);
-  }, [titles])
-  async function fetchTasks() {
-    const {data, error} = await supabase
-      .from("Tasks")
-      .select("*")
-    setTitles(data)
-    // console.log(data)
-  } // populate titles with data
-      
+        fetchTasks()
+    }, [titles])
+  
+    async function fetchTasks() {
+        const {data, error} = await supabase
+        .from("Tasks")
+        .select("*")
+        const sortedData = data.sort((t1, t2) => (t1.IsActive && !t2.IsActive) ? -1 : (!t1.isActive && t2.isActive) ? 1 : 0);
+        setTitles(sortedData);
+    } // populate titles with data
+    
     return (
         <SafeAreaView style={styles.screen}>
             <Header text={'your tasks'} />
