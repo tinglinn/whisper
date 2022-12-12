@@ -56,22 +56,31 @@ export default function ScreenCreateTasks3({ navigation, route} ) { // note navi
         <Text style={{fontFamily: 'Poppins', fontSize: 16}}>{valueMins} minutes</Text>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks4', {
+      <NextButton navigation={navigation} screenName={'ScreenCreateTasks4'} params={{
         title: params.title,
         duedate: params.duedate,
         hours: valueHours,
         minutes: valueMins,
         isdue: params.isdue,
-      })}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
+      }} active={active} warning={"Adjust slider"} />
       
 
     </View>
     
   );
 }
+
+/*
+<Pressable onPress={() => navigation.navigate('ScreenCreateTasks4', {
+  title: params.title,
+  duedate: params.duedate,
+  hours: valueHours,
+  minutes: valueMins,
+  isdue: params.isdue,
+})}>
+  <View style={styles.button} >
+    <Text style={styles.buttontext}>Next</Text></View>
+</Pressable>*/
 
 const styles = StyleSheet.create({
   screen: {

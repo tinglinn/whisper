@@ -52,24 +52,33 @@ export default function ScreenCreateTasks4({ navigation, route} ) { // note navi
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks5', {
+      <NextButton navigation={navigation} screenName={'ScreenCreateTasks5'} params={{
         priority: value,
         title: params.title,
         duedate: params.duedate,
         hours: params.hours,
         minutes: params.minutes,
         isdue: params.isdue,
-      })}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
+      }} active={true} warning={"Adjust slider"} />
+
       
 
     </View>
     
   );
 }
-
+/*
+<Pressable onPress={() => navigation.navigate('ScreenCreateTasks5', {
+  priority: value,
+  title: params.title,
+  duedate: params.duedate,
+  hours: params.hours,
+  minutes: params.minutes,
+  isdue: params.isdue,
+})}>
+  <View style={styles.button} >
+    <Text style={styles.buttontext}>Next</Text></View>
+</Pressable>*/
 const styles = StyleSheet.create({
   screen: {
     flex: 1, 

@@ -118,7 +118,7 @@ function Tasks({ navigation }) {
                     <Text style={styles.titleText}>your tasks</Text>
                     <Pressable style={{marginLeft: 5}} onPress={() => setDisplay(!display)}><MaterialCommunityIcons name="information-outline" color={Themes.colors.darkgray} size={24} /></Pressable>
                 </View>
-                <Pressable onPress={() => navigation.navigate("TasksOverview")}><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} /></Pressable>
+                <Pressable onPress={() => navigation.navigate("Tasks")}><MaterialCommunityIcons name="arrow-right-circle" color={Themes.colors.darkgray} size={28} /></Pressable>
             </View>
             
             {/*<View style={styles.taskList}>
