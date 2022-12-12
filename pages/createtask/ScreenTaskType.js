@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 12,
     margin: 20,
+    width: 360,
   },
 
   title: {
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 10,
     borderWidth: 1,
-    width:'100%',
+    
     padding: 20,
     borderRadius: 7,
     color: 'dark-grey',
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     shadowColor: '#000',
-    width: 320,
+    width: 300,
     
     shadowOffset: {
       width: 0,

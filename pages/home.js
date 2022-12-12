@@ -62,14 +62,16 @@ function TaskCard({ task, navigation }) {
 }
 
 function RenderTask(item, navigation) {
-    return (
-        <TaskCard task={item.Title} navigation={navigation} />
-    )
+    if (item.IsActive){
+        return (
+            <TaskCard task={item.Title} navigation={navigation} />
+        )
+    }
 }
 
 function AddTask({ navigation }) {
     return (
-        <Pressable onPress={() => navigation.navigate('ScreenCreateTasks', )}>
+        <Pressable onPress={() => navigation.navigate("Tasks", {screen: 'ScreenTaskType'})}>
             <DropShadow style={{
                 shadowColor: "#000",
                 shadowOffset: {
