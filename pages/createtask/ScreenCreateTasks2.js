@@ -6,6 +6,8 @@ import Header from '../../components/header';
 import Themes from '../../assets/Themes/index';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { supabase } from '../../env/supabase';
+import BackButton from "./backButton";
+import NextButton from "./nextButton";
 
 export default function ScreenCreateTasks2({ navigation, route}) { // note navigation pprop
   const params = route.params;
@@ -22,9 +24,7 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
       <Header text={"add task"} />
 
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks')}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}><MaterialCommunityIcons name="arrow-left" color={Themes.colors.darkgray} size={20} /><Text style={{color: Themes.colors.darkgray}}>Back</Text></View>
-      </Pressable>
+      <BackButton navigation={navigation}/>
 
       <View style={styles.card}>
 
@@ -45,14 +45,11 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
         </RadioButton.Group>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {
+      <NextButton navigation={navigation} screenName={'ScreenCreateTasks3'} params={{
         title: params.title,
         duedate: date,
         isdue: value,
-      })}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
+      }} active={true} warning={"Adjust slider"}/>
       
 
     </View>
@@ -60,6 +57,15 @@ export default function ScreenCreateTasks2({ navigation, route}) { // note navig
   );
 }
 
+/*
+<Pressable onPress={() => navigation.navigate('ScreenCreateTasks3', {
+  title: params.title,
+  duedate: date,
+  isdue: value,
+})}>
+  <View style={styles.button} >
+    <Text style={styles.buttontext}>Next</Text></View>
+</Pressable>*/
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

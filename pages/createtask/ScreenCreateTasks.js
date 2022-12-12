@@ -16,14 +16,13 @@ LogBox.ignoreLogs([
 
 export default function ScreenTaskType({ navigation, route} ) { // note navigation pprop
   const params = route.params;
-  const [text, onChangeText] = React.useState("");
+  const [text, onChangeText] = React.useState(null);
 
   const nextScreenName = 'ScreenCreateTasks2';
   let active = false;
   if (text != null) {
     active = true;
   }
-
 
   return (
     <View style={styles.screen}>
@@ -47,13 +46,7 @@ export default function ScreenTaskType({ navigation, route} ) { // note navigati
         </View>
       </View>
 
-      <Pressable onPress={() => navigation.navigate('ScreenCreateTasks2', {
-        title: text,
-      })}>
-      <View style={styles.button} >
-      <Text style={styles.buttontext}>Next</Text></View>
-      </Pressable>
-      
+      <NextButton navigation={navigation} screenName={nextScreenName} params={{ title: text }} active={active} warning={'Enter text'}/>
 
     </View>
     
@@ -95,6 +88,7 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 12,
     margin: 20,
+    marginTop: 10,
   },
  
   title: {

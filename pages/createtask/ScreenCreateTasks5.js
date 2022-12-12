@@ -53,6 +53,10 @@ export default function ScreenCreateTasks5({ navigation, route} ) { // note navi
 
       </View>
 
+      <Text style={{ fontFamily: 'Poppins-SemiBold', color: Themes.colors.darkgray }}>Selected 
+        <Text style={{ fontFamily: 'Poppins-SemiBold', color: Themes.colors.red }}> {params.hours / valueHours} sessions</Text>
+        <Text style={{ fontFamily: 'Poppins-SemiBold', color: Themes.colors.darkgray }}> of </Text>
+        <Text style={{ fontFamily: 'Poppins-SemiBold', color: Themes.colors.red }}>{valueHours}-hr</Text> work blocks</Text>
       <Pressable onPress={() => navigation.navigate('ScreenCreateTasksComplete', {
         numSessions: valueHours,
         priority: params.priority,
@@ -103,6 +107,7 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 12,
     margin: 20,
+    marginTop: 60,
   },
 
   title: {
