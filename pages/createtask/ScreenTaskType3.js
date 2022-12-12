@@ -16,7 +16,8 @@ LogBox.ignoreLogs([
 
 export default function ScreenTaskType3({ navigation, route }) { // note navigation pprop
   const params = route.params;
-  
+  const [ready, setReady] = useState(false);
+
   const [date, setDate] = useState(new Date());
 
   const [valueHours, setValueHours] = React.useState(0);
@@ -29,21 +30,26 @@ export default function ScreenTaskType3({ navigation, route }) { // note navigat
   
   useEffect(() => {
     fetchTasks()
-  }, [])
+    console.log(ready);
+  }, [ready])
+
   async function fetchTasks() {
+    
     const {data, error} = await supabase
       .from("Tasks")
       .select("*")
       .eq("Title", params.task)
-    setTitles(data)
-
-    setDate(titles[0].Date);
-    setValue(titles[0].Priority);
-    setValueHours(Math.floor(titles[0].Minutes / 60));
-    setValueMins(titles[0].Minutes % 60);
-    setValueSessions(titles[0].NumSessions);
+    setTitles(data);
+    console.log(titles);
+    setDate(data[0].Date);
+    setValue(data[0].Priority);
+    setValueHours(Math.floor(data[0].Minutes / 60));
+    setValueMins(data[0].Minutes % 60);
+    setValueSessions(data[0].NumSessions);
+    setReady(true);
   }
 
+  if (ready) {
   return (
     <View style={styles.screen}>
     
@@ -58,7 +64,7 @@ export default function ScreenTaskType3({ navigation, route }) { // note navigat
       <View style={styles.card}>
 
         <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 20}}>
-          <Text style={[styles.title]}>Review CS106A:</Text>
+          <Text style={[styles.title]}>Review {params.task}</Text>
           {/* <Pressable onPress={() => navigation.navigate('ScreenTaskType3')}><MaterialCommunityIcons style={styles.clickable_icon} name="pencil-circle" color={Themes.colors.darkgray} size={30} /></Pressable> */}
         </View>
         
@@ -155,7 +161,7 @@ export default function ScreenTaskType3({ navigation, route }) { // note navigat
     </View>
     
   );
-}
+}}
 
 const styles = StyleSheet.create({
   statItem: {

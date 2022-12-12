@@ -28,6 +28,8 @@ export default function ScreenTaskType({ navigation }) { // note navigation ppro
         .from("Tasks")
         .select("*")
       setTitles(data);
+      console.log("data is:", data)
+      console.log("ting's data is:", titles[0]);
     }
 
     // render dropdown format
