@@ -46,7 +46,7 @@ export default function ScreenTaskType({ navigation, route} ) { // note navigati
         </View>
       </View>
 
-      <NextButton navigation={navigation} screenName={nextScreenName} params={{ title: text }} active={active} warning={'enter text'}/>
+      <NextButton navigation={navigation} screenName={nextScreenName} params={{ title: text }} active={active} warning={'Enter text'}/>
 
     </View>
     
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 12,
     margin: 20,
+    marginTop: 10,
   },
  
   title: {

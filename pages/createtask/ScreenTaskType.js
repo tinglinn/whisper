@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 12,
     margin: 20,
-    width: 360,
+   width: 360,
+    marginTop: 50,
   },
 
   title: {

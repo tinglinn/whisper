@@ -8,7 +8,8 @@ function NextButton({ navigation, screenName, params, active, warning }) {
         button = <View style={styles.container}>< Pressable onPress = {() => navigation.navigate(screenName, params)}>
             <View style={styles.activeButton} >
             <Text style={styles.buttontext}>Next</Text></View>
-        </Pressable ></View>
+        </Pressable >
+        </View>
     } else {
         button = <View style={styles.container}>
                     < Pressable disabled={true} onPress={() => navigation.navigate({ screenName })}>
@@ -16,7 +17,7 @@ function NextButton({ navigation, screenName, params, active, warning }) {
                         <Text style={styles.buttontext}>Next</Text></View>
             </Pressable >
             <Text style={styles.warning}>{warning} to continue </Text>
-                </View>
+            </View>
     }
     return (
         button
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: 100,
     },
     activeButton: {
         width: 120,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     warning: {
         color: Themes.colors.red,
         fontFamily: 'Poppins',
-        fontSize: 16,
+        fontSize: 15,
     }
 })
 
